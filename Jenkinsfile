@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/rinkutek/Recarnation-TechTitans.git'
+                git branch: 'master', url: 'https://github.com/rinkutek/Recarnation-TechTitans.git'
             }
         }
         stage('Install Frontend') {
@@ -22,13 +22,10 @@ pipeline {
                 }
             }
         }
-       
-    post {
-        always {
-            echo 'Pipeline finished.'
-        }
-        failure {
-            echo 'Pipeline failed. Check the logs for details.'
+        stage('Deploy') {
+            steps {
+                echo 'Deploy step skipped as no SSH server is configured.'
+            }
         }
     }
 }
