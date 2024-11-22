@@ -22,23 +22,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
-            steps {
-                sshPublisher(publishers: [
-                    sshPublisherDesc(
-                        configName: 'my-server',
-                        transfers: [
-                            sshTransfer(
-                                sourceFiles: 'frontend/dist/**',
-                                remoteDirectory: '/var/www/html',
-                                removePrefix: 'frontend/dist/'
-                            )
-                        ]
-                    )
-                ])
-            }
-        }
-    }
+       
     post {
         always {
             echo 'Pipeline finished.'
