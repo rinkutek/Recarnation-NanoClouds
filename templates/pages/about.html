@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %} | About Us {% endblock %}
+{% block content %}
+
+{% load static %}
+
+<!-- Sub banner start -->
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+        </br>
+            <h1>About Us</h1>
+        </div>
+    </div>
+</div>
+<!-- Sub Banner end -->
+
+<!-- Service center strat -->
+<div class="about-car content-area-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 col-lg-6">
+                <div class="about-car-photo">
+                    <div id="carDetailsSlider" class="carousel car-details-sliders slide">
+                        <!-- main slider carousel items -->
+                        <div class="carousel-inner">
+                            <div class="active item carousel-item" data-slide-number="0">
+                                <img src="{% static 'img/car-1.jpg' %}" class="img-fluid" alt="slider-car">
+                            </div>
+                            <div class="item carousel-item" data-slide-number="1">
+                                <img src="{% static 'img/car-2.jpg' %}" class="img-fluid" alt="slider-car">
+                            </div>
+                            <div class="item carousel-item" data-slide-number="2">
+                                <img src="{% static 'img/car-3.jpg' %}" class="img-fluid" alt="slider-car">
+                            </div>
+                        </div>
+                        <!-- main slider carousel nav controls -->
+                        <ul class="carousel-indicators car-properties list-inline nav nav-justified">
+                            <li class="list-inline-item active">
+                                <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#carDetailsSlider">
+                                    <img src="{% static 'img/car-1.jpg' %}" class="img-fluid" alt="small-car">
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a id="carousel-selector-1" data-slide-to="1" data-target="#carDetailsSlider">
+                                    <img src="{% static 'img/car-2.jpg' %}" class="img-fluid" alt="small-car">
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a id="carousel-selector-2" data-slide-to="2" data-target="#carDetailsSlider">
+                                    <img src="{% static 'img/car-3.jpg' %}" class="img-fluid" alt="small-car">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-7 col-lg-6 align-self-center">
+                <div class="best-used-car">
+                    <h3>Welcome to <span>Recarnation</span></h3>
+                    <p style="text-align: justify;">Welcome to ReCarnation, a platform designed to revolutionize the way people buy and sell pre-owned vehicles. Our mission is to create a seamless, transparent, and trustworthy experience for both sellers and buyers, making car ownership accessible and hassle-free.</p>
+                    <p style="text-align: justify;">At ReCarnation, we believe that every car has a story and a second chance at life. By connecting car owners with potential buyers, we aim to promote sustainability and reduce waste, while helping individuals find their perfect vehicle match. Whether you're looking to sell your beloved car or searching for a reliable ride, ReCarnation is here to make the process as simple and rewarding as possible.</p>
+                    <p style="text-align: justify;">With user-friendly tools, advanced filters, and a secure platform, we ensure a smooth experience for all our users. Our dedicated team works tirelessly to verify listings, ensure quality, and provide exceptional customer support. Join us today and become a part of the ReCarnation community, where every journey begins with trust and reliability.</p>
+                    <p style="text-align: justify;"><strong>Let’s drive the change, together.</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Service center end -->
+
+<div class="content-area">
+</div>
+{% endblock %}

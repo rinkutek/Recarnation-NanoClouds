@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %} | Services {% endblock %}
+{% block content %}
+
+<!-- Sub banner start -->
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>Sell Car</h1>    
+        </div>
+    </div>
+</div>
+<!-- Sub Banner end -->
+
+<!-- Services start -->
+<div class="contact-2 content-area-5">
+    <div class="container">
+        <!-- Main title -->
+        <div class="main-title text-center">
+            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p> -->
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+              {{ form.as_p }}  <!-- Render all form fields -->
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Listing</button>
+          </form>
+    </div>
+</div>
+<!-- Services end -->
+
+
+
+{% endblock %}
