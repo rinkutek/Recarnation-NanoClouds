@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/juniemariam/Recarnation-TechTitans.git'
+                git branch: 'main', url: 'https://github.com/rinkutek/Recarnation-TechTitans.git'
             }
         }
         stage('Install Frontend') {
