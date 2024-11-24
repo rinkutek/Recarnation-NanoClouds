@@ -16,80 +16,64 @@ pipeline {
 
         stage('Setup Python Environment') {
             steps {
-                sh '''
-                    # Create and activate virtual environment
-                    python${PYTHON_VERSION} -m venv ${VENV_NAME}
-                    . ${VENV_NAME}/bin/activate
+                bat """
+                    // Create virtual environment if it doesn't exist
+                    if not exist ${VENV_NAME} python -m venv ${VENV_NAME}
                     
-                    # Upgrade pip
-                    pip install --upgrade pip
-                    
-                    # Install project dependencies
+                    // Activate virtual environment and install dependencies
+                    call ${VENV_NAME}\\Scripts\\activate.bat
+                    python -m pip install --upgrade pip
                     pip install -r requirements.txt
-                '''
+                """
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh '''
-                    . ${VENV_NAME}/bin/activate
-                    
-                    # Run Django tests
+                bat """
+                    call ${VENV_NAME}\\Scripts\\activate.bat
                     python manage.py test
-                    
-                    # Run any additional test suites
-                    # pytest if you're using it
-                    # coverage run manage.py test (if using coverage)
-                '''
+                """
             }
         }
 
         stage('Static Code Analysis') {
             steps {
-                sh '''
-                    . ${VENV_NAME}/bin/activate
-                    
-                    # Run pylint
+                bat """
+                    call ${VENV_NAME}\\Scripts\\activate.bat
+                    pip install pylint flake8
                     pylint --exit-zero **/*.py
-                    
-                    # Run flake8
                     flake8 --exit-zero .
-                '''
+                """
             }
         }
 
         stage('Collect Static Files') {
             steps {
-                sh '''
-                    . ${VENV_NAME}/bin/activate
-                    
-                    # Collect static files
+                bat """
+                    call ${VENV_NAME}\\Scripts\\activate.bat
                     python manage.py collectstatic --noinput
-                '''
+                """
             }
         }
 
         stage('Database Migrations') {
             steps {
-                sh '''
-                    . ${VENV_NAME}/bin/activate
-                    
-                    # Run migrations
+                bat """
+                    call ${VENV_NAME}\\Scripts\\activate.bat
                     python manage.py migrate --noinput
-                '''
+                """
             }
         }
 
         stage('Deploy') {
             steps {
-                sh '''
-                    . ${VENV_NAME}/bin/activate
+                bat """
+                    call ${VENV_NAME}\\Scripts\\activate.bat
                     
-                    # Add your deployment commands here
-                    # This could be deploying to a server, container, or cloud service
+                    // Add your Windows-specific deployment commands here
                     echo "Deploying application..."
-                '''
+                """
             }
         }
     }
