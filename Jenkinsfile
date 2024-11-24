@@ -1,62 +1,109 @@
 pipeline {
     agent any
+
+    environment {
+        PYTHON_VERSION = '3.8'
+        VENV_NAME = 'venv'
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                // Clone the repository from GitHub
-                git branch: 'master', url: 'https://github.com/rinkutek/Recarnation-TechTitans.git'
+                // Checkout code from GitHub
+                checkout scm
             }
         }
-        stage('Setup Backend') {
+
+        stage('Setup Python Environment') {
             steps {
-                dir('backend') {
-                    // Use a virtual environment to install Python dependencies
-                    sh '''
-                    python -m venv venv
-                    source venv/bin/activate
+                sh '''
+                    # Create and activate virtual environment
+                    python${PYTHON_VERSION} -m venv ${VENV_NAME}
+                    . ${VENV_NAME}/bin/activate
+                    
+                    # Upgrade pip
+                    pip install --upgrade pip
+                    
+                    # Install project dependencies
                     pip install -r requirements.txt
-                    '''
-                }
+                '''
             }
         }
-        stage('Run Backend Tests') {
+
+        stage('Run Tests') {
             steps {
-                dir('backend') {
-                    // Run Django tests
-                    sh '''
-                    source venv/bin/activate
+                sh '''
+                    . ${VENV_NAME}/bin/activate
+                    
+                    # Run Django tests
                     python manage.py test
-                    '''
-                }
+                    
+                    # Run any additional test suites
+                    # pytest if you're using it
+                    # coverage run manage.py test (if using coverage)
+                '''
             }
         }
-        stage('Prepare Frontend') {
+
+        stage('Static Code Analysis') {
             steps {
-                dir('frontend') {
-                    // If static HTML exists, copy it to the deployment location
-                    sh '''
-                    mkdir -p /var/www/html
-                    cp -R * /var/www/html
-                    '''
-                }
+                sh '''
+                    . ${VENV_NAME}/bin/activate
+                    
+                    # Run pylint
+                    pylint --exit-zero **/*.py
+                    
+                    # Run flake8
+                    flake8 --exit-zero .
+                '''
             }
         }
-        stage('Run Backend Server') {
+
+        stage('Collect Static Files') {
             steps {
-                dir('backend') {
-                    // Start the Django development server
-                    sh '''
-                    source venv/bin/activate
-                    python manage.py migrate
-                    nohup python manage.py runserver 0.0.0.0:8000 &
-                    '''
-                }
+                sh '''
+                    . ${VENV_NAME}/bin/activate
+                    
+                    # Collect static files
+                    python manage.py collectstatic --noinput
+                '''
+            }
+        }
+
+        stage('Database Migrations') {
+            steps {
+                sh '''
+                    . ${VENV_NAME}/bin/activate
+                    
+                    # Run migrations
+                    python manage.py migrate --noinput
+                '''
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh '''
+                    . ${VENV_NAME}/bin/activate
+                    
+                    # Add your deployment commands here
+                    # This could be deploying to a server, container, or cloud service
+                    echo "Deploying application..."
+                '''
             }
         }
     }
+
     post {
         always {
-            echo 'Pipeline execution complete.'
+            // Clean up workspace
+            cleanWs()
+        }
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
         }
     }
 }
