@@ -4,7 +4,7 @@ pipeline {
     environment {
         PYTHON_VERSION = '3.8'
         VENV_NAME = 'venv'
-        DJANGO_SETTINGS_MODULE = 'cardealer.settings'  // Updated settings path
+        DJANGO_SETTINGS_MODULE = 'cardealer.settings'
     }
 
     stages {
@@ -16,27 +16,15 @@ pipeline {
 
         stage('Setup Python Environment') {
             steps {
-                // Create a temporary requirements file with fixed versions
-                bat """
-                    (
-                        echo django-ckeditor==6.3.2
-                        echo Django==3.2.23
-                        echo psycopg2-binary
-                    ) > fixed_requirements.txt
-                    type requirements.txt | findstr /v "django-ckeditor Django psycopg2" >> fixed_requirements.txt
-                """
-                
-                // Setup virtual environment and install dependencies
                 bat """
                     if not exist ${VENV_NAME} python -m venv ${VENV_NAME}
                     call ${VENV_NAME}\\Scripts\\activate.bat
                     python -m pip install --upgrade pip setuptools wheel
-                    
-                    rem Install from the fixed requirements
-                    pip install -r fixed_requirements.txt --no-cache-dir
-                    
-                    rem Clean up
-                    del fixed_requirements.txt
+                    pip install django-ckeditor==6.3.2
+                    pip install Django==3.2.23
+                    pip install psycopg2-binary
+                    pip install -r requirements.txt --no-deps
+                    pip install -r requirements.txt
                 """
             }
         }
@@ -46,7 +34,6 @@ pipeline {
                 bat """
                     call ${VENV_NAME}\\Scripts\\activate.bat
                     set PYTHONPATH=%WORKSPACE%
-                    set DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
                     python manage.py test || exit 0
                 """
             }
@@ -56,9 +43,11 @@ pipeline {
             steps {
                 bat """
                     call ${VENV_NAME}\\Scripts\\activate.bat
-                    pip install pylint flake8
-                    pylint --exit-zero **/*.py || exit 0
-                    flake8 --exit-zero . || exit 0
+                    pip install pylint flake8 pylint-django
+                    
+                    rem Only analyze project files, exclude venv and migrations
+                    pylint --load-plugins pylint_django --ignore=venv,*/migrations/* cardealer || exit 0
+                    flake8 cardealer --exclude=venv,*/migrations/* || exit 0
                 """
             }
         }
@@ -67,8 +56,7 @@ pipeline {
             steps {
                 bat """
                     call ${VENV_NAME}\\Scripts\\activate.bat
-                    set DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
-                    python manage.py collectstatic --noinput || exit 0
+                    python manage.py collectstatic --noinput -v 0 || exit 0
                 """
             }
         }
@@ -77,8 +65,6 @@ pipeline {
             steps {
                 bat """
                     call ${VENV_NAME}\\Scripts\\activate.bat
-                    set DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
-                    python manage.py makemigrations
                     python manage.py migrate --noinput || exit 0
                 """
             }
@@ -88,11 +74,7 @@ pipeline {
             steps {
                 bat """
                     call ${VENV_NAME}\\Scripts\\activate.bat
-                    set DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
                     echo "Deploying application..."
-                    
-                    rem Start the Django development server (for testing purposes)
-                    rem python manage.py runserver 0.0.0.0:8000
                 """
             }
         }
