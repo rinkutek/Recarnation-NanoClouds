@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %} Edit Car {% endblock %}
+{% block content %}
+
+<!-- Sub banner start -->
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>Modify Car Details</h1>
+        </div>
+    </div>
+</div>
+<!-- Sub Banner end -->
+
+<div class="container">
+    <br>
+
+    <!-- Display messages -->
+    {% if messages %}
+        <div class="alert alert-warning">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Display form errors -->
+    {% if form.errors %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                        <li>{{ field }}: {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <!-- Edit Car Form -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-success">Save Changes</button>
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+    </form>
+</div>
+
+{% endblock %}

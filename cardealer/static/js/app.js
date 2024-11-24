@@ -99,8 +99,7 @@ $(function () {
         placedDashboard();
     });
 
-    function adjustHeader()
-    {
+    function adjustHeader() {
         var windowWidth = $(window).width();
         if(windowWidth > 0) {
             if ($(document).scrollTop() >= 100) {
@@ -108,21 +107,24 @@ $(function () {
                     $('.sticky-header').addClass('header-shrink');
                 }
                 if($('.do-sticky').length < 1) {
-                    $('.company-logo img').attr('src', '../static/img/logos/cardealerLogo.png');
+                    // Use absolute path for the image source
+                    $('.company-logo img').attr('src', window.location.origin + '/static/img/logos/cardealerLogo.png');
                 }
-            }
-            else {
+            } else {
                 $('.sticky-header').removeClass('header-shrink');
                 if($('.do-sticky').length < 1 && $('.fixed-header').length == 0 && $('.fixed-header2').length == 0) {
-                    $('.company-logo img').attr('src', '../static/img/logos/cardealerLogo-White.png');
+                    // Use absolute path for the image source
+                    $('.company-logo img').attr('src', window.location.origin + '/static/img/logos/cardealerLogo-White.png');
                 } else {
-                    $('.company-logo img').attr('src', '../static/img/logos/cardealerLogo.png');
+                    // Use absolute path for the image source
+                    $('.company-logo img').attr('src', window.location.origin + '/static/img/logos/cardealerLogo.png');
                 }
             }
         } else {
-            $('.company-logo img').attr('src', '../static/img/logos/cardealerLogo.png');
+            // Use absolute path for the image source
+            $('.company-logo img').attr('src', window.location.origin + '/static/img/logos/cardealerLogo.png');
         }
-    }
+    }    
 
     function doSticky()
     {

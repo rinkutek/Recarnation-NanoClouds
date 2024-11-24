@@ -1,10 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Team, ContactMessage
 from cars.models import Car
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.contrib import messages
 from .forms import CarForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
+
 
 
 # Create your views here.
@@ -37,18 +40,66 @@ def about(request):
     return render(request, 'pages/about.html', data)
 
 def sell(request):
+    if request.user.is_authenticated:
+        # Get all cars listed by the current logged-in user
+        cars = Car.objects.filter(seller=request.user)
+        return render(request, 'pages/sell.html', {'cars': cars, 'is_logged_in': True})
+    else:
+        # No cars to show for non-logged-in users
+        return render(request, 'pages/sell.html', {'is_logged_in': False})
+
+
+@login_required
+def add_car(request):
+    # Handling the form for adding a new car
     if request.method == 'POST':
         form = CarForm(request.POST, request.FILES)
         if form.is_valid():
             car = form.save(commit=False)
-            car.seller = request.user  # Set the logged-in user as the seller
+            car.seller = request.user  # Assign the logged-in user as the seller
             car.status = 'Pending'  # Default status
             car.save()
-            return redirect('dashboard')  # Redirect to seller dashboard
+            messages.success(request, 'Car added successfully!')
+            return redirect('sell')  # Redirect back to the sell page to show the newly added car
     else:
         form = CarForm()
 
-    return render(request, 'pages/sell.html', {'form': form})
+    return render(request, 'pages/add_car.html', {'form': form})
+
+
+
+@login_required
+def edit_car(request, car_id):
+    try:
+        car = Car.objects.get(id=car_id, seller=request.user)  # Ensure the car belongs to the logged-in user
+    except Car.DoesNotExist:
+        car = None  # No car found for the user
+
+    if car is None:
+        messages.error(request, "No car found to edit. Please add a car first.")
+        return redirect('sell')  # Redirect back to the sell page if the car is not found
+
+    if request.method == 'POST':
+        form = CarForm(request.POST, request.FILES, instance=car)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Car details updated successfully!')
+            return redirect('sell')  # Redirect back to the sell page after saving changes
+    else:
+        form = CarForm(instance=car)
+
+    return render(request, 'pages/edit_car.html', {'form': form, 'car': car})
+
+
+
+@login_required
+def delete_car(request, car_id):
+    car = get_object_or_404(Car, id=car_id, seller=request.user)  # Ensure the car belongs to the logged-in user
+    car.delete()
+    messages.success(request, 'Car deleted successfully!')
+    return redirect('sell')  # Redirect back to the sell page after deleting the car
+
+
 
 def contact(request):
     if request.method == 'POST':

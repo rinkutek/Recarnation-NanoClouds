@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %} Add Car {% endblock %}
+{% block content %}
+
+<!-- Sub banner start -->
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>Add a New Car</h1>    
+        </div>
+    </div>
+</div>
+<!-- Sub Banner end -->
+
+<div class="container">
+    <br>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Save Car</button>
+         <!-- Add a cancel button to return to the sell page -->
+        <a href="{% url 'sell' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+    
+   
+</div>
+
+{% endblock %}
