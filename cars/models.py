@@ -2,6 +2,8 @@ from django.db import models
 from datetime import datetime
 from ckeditor.fields import RichTextField
 from multiselectfield import MultiSelectField
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 class Car(models.Model):
@@ -121,5 +123,7 @@ class Car(models.Model):
         choices=[('Pending', 'Pending'), ('Approved', 'Approved'), ('Rejected', 'Rejected')],
         default='Pending'
     )
+    seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cars', null=True, blank=True)
+
     def __str__(self):
         return self.car_title

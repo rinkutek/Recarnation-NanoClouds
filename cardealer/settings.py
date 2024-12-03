@@ -145,9 +145,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'cardealer/static'),
+    os.path.join(BASE_DIR,"cardealer","static"),
 ]
 
 # Media settings
@@ -176,8 +176,8 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 SOCIALACCOUNT_LOGIN_ON_GET = True
 SOCIALACCOUNT_ADAPTER = 'allauth.socialaccount.adapter.DefaultSocialAccountAdapter'
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =  ""
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ""
+#SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =  ""
+#SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ""
 SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = "http://127.0.0.1:8000/accounts/social/login/google/google/login/callback/"
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
