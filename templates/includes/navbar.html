@@ -46,6 +46,17 @@
                     </li>
                     <li class="nav-item">
                         <a
+                        {% if 'predict' in request.path %}
+                        class="nav-link active"
+                        {% else %}
+                        class="nav-link"
+                        {% endif %}
+                         href="{% url 'predict' %}">
+                            Price Predictor
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a
                         {% if 'about' in request.path %}
                         class="nav-link active"
                         {% else %}

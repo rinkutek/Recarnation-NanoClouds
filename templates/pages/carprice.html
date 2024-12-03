@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+
+{% block title %} | Services {% endblock %}
+{% block content %}
+
+<!-- Sub banner start -->
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>Price Predictor</h1>    
+        </div>
+    </div>
+</div>
+<!-- Sub Banner end -->
+
+<!-- Services start -->
+<head>
+    <style>
+        /* Add some CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: blue;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+        }
+
+        /* label {
+            display: block;
+            margin: 10px 0;
+            font-weight: bold;
+        } */
+
+        /* input {
+            display: block;
+            width: 95%;
+            padding: 10px;
+            border: 1px solid blue;
+            border-radius: 5px;
+        } */
+
+        button {
+            display: block;
+            width: 95%;
+            padding: 15px;
+            margin: 10px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: blue;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #007bff;
+        }
+
+        .price-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            padding: 20px;
+            border: 1px solid green;
+            border-radius: 10px;
+            background-color: #e0ffe0;
+            display: none;
+        }
+        
+        .price {
+            font-size: 36px;
+            font-weight: bold;
+            color: green;
+            text-align: center;
+        }
+        
+        #close-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: green;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        
+
+    </style>
+</head>
+<body>
+    
+
+    <form method="post"  >
+        {% csrf_token %}
+
+        <label for="make">Enter the maker :</label>
+        <input type="text" name="make" class="form-control" placeholder="make of a car (BMW, Toyota, and so on)" required>
+    
+        <label for="model">Enter the model :</label>
+        <input type="text" name="model" class="form-control" placeholder="model of a car" required>
+
+        <label for="year">Enter the year :</label>
+        <input type="number" name="year" class="form-control" placeholder="year when the car was manufactured" required>
+        
+        <label for="engine_fuel_type">Enter the engine fuel type :</label>
+        <input type="text" name="engine_fuel_type" class="form-control" placeholder="type of fuel the engine needs (diesel, electric, and so on)" required>
+        
+        <label for="engine_hp">Enter the engine horse power :</label>
+        <input type="number" name="engine_hp" class="form-control" placeholder="horsepower of the engine" required>
+        
+        <label for="engine_cylinders">Enter the engine cylinders :</label>
+        <input type="number" name="engine_cylinders" class="form-control" placeholder="number of cylinders in the engine" required>
+        
+        <label for="transmission_type">Enter the transmission type :</label>
+        <input type="text" name="transmission_type" class="form-control" placeholder="number of cylinders in the engine" required>  
+
+        <label for="driven_wheels">Enter the driven wheels :</label>
+        <input type="text" name="driven_wheels" class="form-control" placeholder="front, rear, all" required>
+
+        <label for="number_of_doors">Enter the number of doors :</label>
+        <input type="number" name="number_of_doors" class="form-control" placeholder="number of doors a car has" required>
+
+        <label for="market_category">Enter the market category :</label>
+        <input type="text" name="market_category" class="form-control" placeholder="luxury, crossover, and so on" required>
+
+        <label for="vehicle_size">Enter the vehicle size :</label>
+        <input type="text" name="vehicle_size" class="form-control" placeholder="compact, midsize, or large" required>
+
+        <label for="vehicle_style">Enter the vehicle style :</label>
+        <input type="text" name="vehicle_style" class="form-control" placeholder="sedan or convertible" required>
+
+        <label for="highway_mpg">Enter the highway mpg :</label>
+        <input type="number" name="highway_mpg" class="form-control" placeholder="miles per gallon (mpg) on the highway" required>
+
+        <label for="city_mpg">Enter the city mpg :</label>
+        <input type="number" name="city_mpg" class="form-control" placeholder="miles per gallon in the city" required>
+        
+        <label for="popularity">Enter the popularity :</label>
+        <input type="number" name="popularity" class="form-control" placeholder="number of times the car was mentioned in a Twitter stream" required>
+
+        <button type="submit">Submit</button>
+    </form>
+
+
+    {% if price %}
+    
+<div class="price-container" id="price-popup">
+    <h1>
+        The predicted price of your car is:
+    </h1>
+    <p class="price">
+        {{price}} $
+    </p>
+    <button id="close-button">OK</button>
+</div>
+<script>
+    var pricePopup = document.getElementById("price-popup");
+    var closeButton = document.getElementById("close-button");
+
+    pricePopup.style.display = "block";
+
+    function hidePricePopup() {
+        pricePopup.style.display = "none";
+    }
+
+    closeButton.addEventListener("click", hidePricePopup);
+</script>
+{% endif %}
+
+
+
+</body>
+<!-- Services end -->
+
+
+
+{% endblock %}
