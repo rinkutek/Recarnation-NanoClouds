@@ -31,7 +31,9 @@
         "no_of_owners": "1",
         "is_featured": true,
         "created_date": "2020-07-06T11:21:29Z",
-        "status": "Approved"
+        "status": "Approved",
+        "seller_email": "juniemariyam@gmail.com",
+        "seller_phone": "6504082717" 
     }
 },
 {
@@ -66,7 +68,9 @@
         "no_of_owners": "2",
         "is_featured": true,
         "created_date": "2020-07-06T17:11:05Z",
-        "status": "Approved"
+        "status": "Approved",
+        "seller_email": "juniemariyam@gmail.com",
+        "seller_phone": "6504082717" 
     }
 },
 {
@@ -101,7 +105,9 @@
         "no_of_owners": "1",
         "is_featured": true,
         "created_date": "2020-07-06T17:13:19Z",
-        "status": "Approved"
+        "status": "Approved",
+        "seller_email": "juniemariyam@gmail.com",
+        "seller_phone": "6504082717" 
     }
 },
 {
@@ -136,7 +142,9 @@
         "no_of_owners": "1",
         "is_featured": true,
         "created_date": "2020-07-06T17:15:27Z",
-        "status": "Approved"
+        "status": "Approved",
+        "seller_email": "juniemariyam@gmail.com",
+        "seller_phone": "6504082717" 
     }
 },
 {
@@ -171,7 +179,9 @@
         "no_of_owners": "1",
         "is_featured": false,
         "created_date": "2020-07-10T11:31:56Z",
-        "status": "Approved"
+        "status": "Approved",
+        "seller_email": "juniemariyam@gmail.com",
+        "seller_phone": "6504082717" 
     }
 },
 {
@@ -206,7 +216,9 @@
         "no_of_owners": "2",
         "is_featured": false,
         "created_date": "2020-07-10T11:36:10Z",
-        "status": "Rejected"
+        "status": "Rejected",
+        "seller_email": "juniemariyam@gmail.com",
+        "seller_phone": "6504082717" 
     }
 },
 

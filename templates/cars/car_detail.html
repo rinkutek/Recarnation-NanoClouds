@@ -152,7 +152,7 @@
                     <!-- Advanced search start -->
                     <div class="widget advanced-search d-none-992">
                         {% if user.is_authenticated %}
-                            <button type="submit" class="btn btn-primary">Send Inquiry</button>
+                        <button class="btn btn-danger bomd btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Send a Message</button>
                         {% else %}
                             <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-primary">
                                 Log in to Send Inquiry
