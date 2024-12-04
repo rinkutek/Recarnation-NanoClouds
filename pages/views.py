@@ -5,17 +5,13 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.contrib import messages
 from .forms import CarForm
-<<<<<<< HEAD
 from .car import w_calc,prepare_X
 import pandas as pd
 import numpy as np
-=======
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
+from contacts.models import Contact
 
->>>>>>> 9f99cfda93482886b0cd0df4f099689b2ee6a72b
-
-w_0 , w = w_calc()
 
 # Create your views here.
 
@@ -46,14 +42,74 @@ def about(request):
     }
     return render(request, 'pages/about.html', data)
 
+# def sell(request):
+#     if request.user.is_authenticated:
+#         # Get all cars listed by the current logged-in user
+#         cars = Car.objects.filter(seller=request.user)
+#         return render(request, 'pages/sell.html', {'cars': cars, 'is_logged_in': True})
+#     else:
+#         # No cars to show for non-logged-in users
+#         return render(request, 'pages/sell.html', {'is_logged_in': False})
+                    
+
+
+# def sell(request):
+#     if request.user.is_authenticated:
+#         # Get all cars listed by the current logged-in seller
+#         cars = Car.objects.filter(seller=request.user)
+
+#         # Create a dictionary to store inquiries for each car
+#         car_inquiries = {}
+#         for car in cars:
+#             # Fetch inquiries for the current car
+#             inquiries = Contact.objects.filter(car_id=car.id)
+#             car_inquiries[car.id] = inquiries
+
+#         return render(request, 'pages/sell.html', {
+#             'cars': cars,
+#             'car_inquiries': car_inquiries,
+#             'is_logged_in': True
+#         })
+#     else:
+#         # Redirect non-authenticated users to login with a warning message
+#         messages.error(request, "You need to log in to view your listings.")
+#         return redirect('login')
+
+# def sell(request):
+#     if request.user.is_authenticated:
+#         # Get all cars listed by the current logged-in seller
+#         cars = Car.objects.filter(seller=request.user)
+
+#         # Add inquiries directly to each car
+#         for car in cars:
+#             car.inquiries = Contact.objects.filter(car_id=car.id)
+
+#         return render(request, 'pages/sell.html', {
+#             'cars': cars,
+#             'is_logged_in': True
+#         })
+#     else:
+#         # Redirect non-authenticated users to login with a warning message
+#         messages.error(request, "You need to log in to view your listings.")
+#         return redirect('login')
+
 def sell(request):
     if request.user.is_authenticated:
-        # Get all cars listed by the current logged-in user
+        # Fetch all cars listed by the logged-in seller
         cars = Car.objects.filter(seller=request.user)
-        return render(request, 'pages/sell.html', {'cars': cars, 'is_logged_in': True})
+
+        # Attach inquiries to each car
+        for car in cars:
+            car.inquiries = Contact.objects.filter(car_id=car.id)
+
+        return render(request, 'pages/sell.html', {
+            'cars': cars,
+            'is_logged_in': True
+        })
     else:
-        # No cars to show for non-logged-in users
-        return render(request, 'pages/sell.html', {'is_logged_in': False})
+        # Redirect non-authenticated users to login
+        messages.error(request, "You need to log in to view your listings.")
+        return redirect('login')
 
 
 @login_required

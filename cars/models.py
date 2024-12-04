@@ -124,6 +124,8 @@ class Car(models.Model):
         default='Pending'
     )
     seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cars', null=True, blank=True)
+    seller_email = models.EmailField(blank=True, null=True)
+    seller_phone = models.CharField(max_length=20, blank=True, null=True)
 
     def __str__(self):
         return self.car_title

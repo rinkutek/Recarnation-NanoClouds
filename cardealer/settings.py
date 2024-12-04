@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import dj_database_url
+from decouple import config
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -172,12 +174,19 @@ ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True  # Automatically log in after email c
 ACCOUNT_ADAPTER = 'allauth.account.adapter.DefaultAccountAdapter'
 
 # Email backend for development (prints to console)
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Your SMTP server
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'recarnationtechtitans@gmail.com'  # Your email address
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
 
 SOCIALACCOUNT_LOGIN_ON_GET = True
 SOCIALACCOUNT_ADAPTER = 'allauth.socialaccount.adapter.DefaultSocialAccountAdapter'
-#SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =  ""
-#SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ""
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =  ""
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ""
 SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = "http://127.0.0.1:8000/accounts/social/login/google/google/login/callback/"
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -204,5 +213,5 @@ AUTHENTICATION_BACKENDS = (
 
 # Optional settings for django-allauth
 LOGIN_REDIRECT_URL = '/' # Redirect after login
-LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
+LOGOUT_REDIRECT_URL = '/'  # Redirect after logout 
 

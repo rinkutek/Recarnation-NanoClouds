@@ -10,10 +10,12 @@ class CarForm(forms.ModelForm):
             'car_title', 'state', 'city', 'color', 'model', 'year', 'condition', 'price',
             'description', 'car_photo', 'car_photo_1', 'car_photo_2', 'car_photo_3', 'car_photo_4',
             'features', 'body_style', 'engine', 'transmission', 'interior', 'miles', 'doors',
-            'passengers', 'vin_no', 'milage', 'fuel_type', 'no_of_owners'
+            'passengers', 'vin_no', 'milage', 'fuel_type', 'no_of_owners', 'seller_email', 'seller_phone'
         ]
     
     # Customize widgets for better UI/UX
+    seller_email = forms.EmailField(required=True)
+    seller_phone = forms.CharField(max_length=20, required=True)
     car_title = forms.CharField(max_length=255, widget=forms.TextInput(attrs={'class': 'form-control'}))
     state = forms.ChoiceField(choices=Car.state_choice, widget=forms.Select(attrs={'class': 'form-control'}))
     city = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control'}))
