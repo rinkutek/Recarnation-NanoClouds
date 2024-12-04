@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from contacts.models import Contact
 
+w_0 , w = w_calc()
 
 # Create your views here.
 
