@@ -7,14 +7,10 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('about', views.about, name='about'),
     path('sell', views.sell, name='sell'),
-<<<<<<< HEAD
     path('predict', views.predict, name='predict'),
-    path('contact', views.contact, name='contact')
-]
-=======
+    path('contact', views.contact, name='contact'),
     path('contact', views.contact, name='contact'),
     path('edit_car/<int:car_id>/', views.edit_car, name='edit_car'),
     path('delete_car/<int:car_id>/', views.delete_car, name='delete_car'),  # Delete car page
     path('add_car', views.add_car, name='add_car')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  # Edit car page
->>>>>>> 9f99cfda93482886b0cd0df4f099689b2ee6a72b
