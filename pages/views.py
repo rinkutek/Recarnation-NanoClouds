@@ -12,11 +12,18 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from contacts.models import Contact
 
+# Precompute weight coefficients for prediction
+# `w_0` is the intercept and `w` contains the weights for the model
 w_0 , w = w_calc()
 
-# Create your views here.
-
+# Function to display the homepage
 def home(request):
+    """
+    Displays the homepage.
+    - Fetches all teams and featured cars from the database.
+    - Provides search options for models, cities, years, and body styles.
+    - Renders the 'home.html' template with the fetched data.
+    """
     teams = Team.objects.all()
     featured_cars = Car.objects.order_by('-created_date').filter(is_featured=True)
     all_cars = Car.objects.order_by('-created_date')
@@ -35,66 +42,27 @@ def home(request):
     }
     return render(request, 'pages/home.html', data)
 
-
+# Function to display the About page
 def about(request):
+    """
+    Displays the About Us page.
+    - Fetches team data from the database to showcase team members.
+    - Renders the 'about.html' template with team data.
+    """
     teams = Team.objects.all()
     data = {
         'teams': teams,
     }
     return render(request, 'pages/about.html', data)
 
-# def sell(request):
-#     if request.user.is_authenticated:
-#         # Get all cars listed by the current logged-in user
-#         cars = Car.objects.filter(seller=request.user)
-#         return render(request, 'pages/sell.html', {'cars': cars, 'is_logged_in': True})
-#     else:
-#         # No cars to show for non-logged-in users
-#         return render(request, 'pages/sell.html', {'is_logged_in': False})
-                    
-
-
-# def sell(request):
-#     if request.user.is_authenticated:
-#         # Get all cars listed by the current logged-in seller
-#         cars = Car.objects.filter(seller=request.user)
-
-#         # Create a dictionary to store inquiries for each car
-#         car_inquiries = {}
-#         for car in cars:
-#             # Fetch inquiries for the current car
-#             inquiries = Contact.objects.filter(car_id=car.id)
-#             car_inquiries[car.id] = inquiries
-
-#         return render(request, 'pages/sell.html', {
-#             'cars': cars,
-#             'car_inquiries': car_inquiries,
-#             'is_logged_in': True
-#         })
-#     else:
-#         # Redirect non-authenticated users to login with a warning message
-#         messages.error(request, "You need to log in to view your listings.")
-#         return redirect('login')
-
-# def sell(request):
-#     if request.user.is_authenticated:
-#         # Get all cars listed by the current logged-in seller
-#         cars = Car.objects.filter(seller=request.user)
-
-#         # Add inquiries directly to each car
-#         for car in cars:
-#             car.inquiries = Contact.objects.filter(car_id=car.id)
-
-#         return render(request, 'pages/sell.html', {
-#             'cars': cars,
-#             'is_logged_in': True
-#         })
-#     else:
-#         # Redirect non-authenticated users to login with a warning message
-#         messages.error(request, "You need to log in to view your listings.")
-#         return redirect('login')
-
+# Function to display the Sell page
 def sell(request):
+    """
+    Displays the Sell page for authenticated users.
+    - Fetches cars listed by the logged-in user.
+    - Attaches related inquiries to each car.
+    - Redirects non-authenticated users to the login page with an error message.
+    """
     if request.user.is_authenticated:
         # Fetch all cars listed by the logged-in seller
         cars = Car.objects.filter(seller=request.user)
@@ -112,10 +80,15 @@ def sell(request):
         messages.error(request, "You need to log in to view your listings.")
         return redirect('login')
 
-
+# Function to add a car
 @login_required
 def add_car(request):
-    # Handling the form for adding a new car
+    """
+    Handles adding a new car.
+    - Displays a form to input car details.
+    - Saves the new car with 'Pending' status and assigns the logged-in user as the seller.
+    - Redirects to the Sell page on success or shows the form with validation errors.
+    """
     if request.method == 'POST':
         form = CarForm(request.POST, request.FILES)
         if form.is_valid():
@@ -131,9 +104,15 @@ def add_car(request):
     return render(request, 'pages/add_car.html', {'form': form})
 
 
-
+# Function to edit a car
 @login_required
 def edit_car(request, car_id):
+    """
+    Handles editing an existing car.
+    - Ensures the car belongs to the logged-in user.
+    - Displays a form pre-filled with car details.
+    - Saves changes and redirects to the Sell page on success.
+    """
     try:
         car = Car.objects.get(id=car_id, seller=request.user)  # Ensure the car belongs to the logged-in user
     except Car.DoesNotExist:
@@ -155,9 +134,14 @@ def edit_car(request, car_id):
     return render(request, 'pages/edit_car.html', {'form': form, 'car': car})
 
 
-
+# Function to delete a car
 @login_required
 def delete_car(request, car_id):
+    """
+    Handles deleting a car.
+    - Ensures the car belongs to the logged-in user.
+    - Deletes the car and redirects to the Sell page with a success message.
+    """
     car = get_object_or_404(Car, id=car_id, seller=request.user)  # Ensure the car belongs to the logged-in user
     car.delete()
     messages.success(request, 'Car deleted successfully!')
@@ -165,8 +149,13 @@ def delete_car(request, car_id):
 
 
 
-
+# Function to handle the contact form
 def contact(request):
+    """
+    Handles the contact form submission.
+    - Collects form data from the POST request and saves it in the database.
+    - Displays a success message and redirects back to the Contact page.
+    """
     if request.method == 'POST':
         # Getting form data from POST request
         name = request.POST['name']
@@ -192,8 +181,14 @@ def contact(request):
 
     return render(request, 'pages/contact.html')
 
+# Function to predict car prices
 def predict(request):
-    
+    """
+    Handles car price prediction.
+    - Accepts car attributes from a POST request.
+    - Prepares input data and applies the prediction model to estimate the price.
+    - Renders the prediction result on the same page.
+    """
     if request.method =='POST':
      
         df ={

@@ -7,6 +7,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 
+# Function for car inquiry
 @login_required
 def inquiry(request):
     if request.method == 'POST':
@@ -25,13 +26,6 @@ def inquiry(request):
         try:
             # Validate car existence
             car = Car.objects.get(id=car_id)
-
-            # Check if the user has already made an inquiry for this car
-            # existing_inquiry = Contact.objects.filter(car_id=car_id, email=email)
-            # if existing_inquiry:
-            #     messages.error(request, "You have already made an inquiry for this car.")
-            #     return redirect(f'/cars/{car_id}')
-
             # Save the inquiry
             contact = Contact(
                 car_id=car_id,

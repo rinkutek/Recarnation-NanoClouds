@@ -1,7 +1,7 @@
 from django.db import models
 from datetime import datetime
 
-# Create your models here.
+# Contact Model
 class Contact(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)

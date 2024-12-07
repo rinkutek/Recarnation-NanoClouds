@@ -5,7 +5,7 @@ from multiselectfield import MultiSelectField
 from django.contrib.auth.models import User
 
 
-# Create your models here.
+# Car model.
 class Car(models.Model):
 
     state_choice = (
