@@ -65,15 +65,8 @@ please create one using superuser
   python manage.py createsuperuser
 ```
 
-
-### Initial database setup
-we have some dump data which you can use
-
-```bash
-  python manage.py loaddata project_dump.json
-```
-
 We have some secrets taken off from the repo. Please use the .env and settings.py file to add yours.
 
+[Watch the Demo](recarnation-assets/demo.mp4)
 
 
