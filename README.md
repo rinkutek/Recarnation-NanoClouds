@@ -67,6 +67,10 @@ please create one using superuser
 
 We have some secrets taken off from the repo. Please use the .env and settings.py file to add yours.
 
-[Watch the Demo](recarnation-assets/demo.mp4)
+## Demo 
+[Watch the Demo](https://drive.google.com/file/d/1bQt8-tVCdFl4Yc_nGkXGL_pLMdftRrd6/view?usp=sharing)
+
+## Presentation
+[View the presentation as a PDF](recarnation-assets/presentation.pdf)
 
 
