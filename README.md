@@ -23,8 +23,55 @@ This application aspires to revolutionize the pre-owned car market by offering a
 - [Rinku Techchandani](https://github.com/rinkutek)
 - [Nitya Reddy]()
 
+## Features & Implementation
 
-## Run Locally
+### **Required Features**
+1. **User Authentication**  
+   - Secure login and registration system with support for both standard credentials and OAuth.  
+   - Ensures safe and easy access for all users.
+
+2. **Advanced Car Browsing**  
+   - Buyers can explore available cars on the "Buy" page using a powerful search and filtering system.  
+   - Results can be viewed in either grid or list format for a personalized experience.
+
+3. **Car Listings for Sellers**  
+   - Sellers can use the "Sell" page to list their cars with detailed information, including make, model, year, mileage, and price.  
+   - Listings are visible in general search results and on the seller’s profile.
+
+4. **Administrative Controls**  
+   - Admins can review, approve, or reject car listings to maintain platform quality.  
+   - Full control over user management and car listings ensures a secure and high-quality marketplace.
+
+5. **Data Security and Reliability**  
+   - Robust back-end system integrated with a database to securely store user data, car listings, and transaction history.  
+   - Continuous delivery and automated testing are powered by Jenkins to ensure platform stability.
+
+---
+
+### **Additional Features**
+1. **Price Predictor for Sellers**  
+   Helps sellers determine the optimal price for their vehicles by analyzing market trends and car specifications.  
+
+2. **Detailed Car Listings**  
+   Each listing provides comprehensive details, including specifications, condition, and pricing, to help buyers make informed decisions.  
+
+3. **Seller and Admin Marketplace Management**  
+   Sellers and Admins can manage sold and unsold vehicles, update or remove listings, and Admins control user permissions.  
+
+4. **User-Friendly Design**  
+   A simple, intuitive interface ensures a seamless experience for buyers, sellers, and administrators alike.  
+
+---
+
+## Technologies Used
+- **Frontend:** HTML, CSS, Javascript  
+- **Backend:** Django
+- **ML Model:** Linear Regression using libraries like Pandas, Numpy, Matplotlib  
+- **Database:** PostgreSQL
+- **Authentication:** OAuth 2.0
+- **DevOps:** Jenkins, Github
+
+## Local Setup Instructions
 
 Clone the project
 
@@ -67,9 +114,39 @@ please create one using superuser
 
 We have some secrets taken off from the repo. Please use the .env and settings.py file to add yours.
 
+## Test Cases & Results
+
+We conducted comprehensive **functional tests** to ensure the reliability and correctness of the application. These tests cover all critical features, ensuring a seamless and secure user experience.
+
+### **Summary of Functional Tests**
+1. **User Authentication**  
+   Verified the secure login and registration processes, including OAuth functionality.  
+
+2. **Car Search and Filtering**  
+   Ensured buyers can search for cars using advanced filters like make, model, year, and price.  
+
+3. **Car Listing Submission**  
+   Confirmed sellers can create car listings with detailed information, including make, model, year, and price.  
+
+4. **Admin Approval Workflow**  
+   Validated that admins can review, approve, or reject car listings effectively.
+
+### **Screenshots of Tests Passing**
+Below is a consolidated screenshot demonstrating the successful execution of various functional tests:  
+
+![Functional Tests Screenshot](recarnation-assets/test.jpeg)  
+*Screenshot: Displays the passing results of key functional tests.*
+
+---
+
+By conducting these tests, we ensured that the application operates as intended, providing a reliable platform for buying and selling pre-owned cars.
+
 ## Demo 
 [Watch the Demo](https://drive.google.com/file/d/1bQt8-tVCdFl4Yc_nGkXGL_pLMdftRrd6/view?usp=sharing)
 
 ## Presentation
 [View the presentation as a PDF](recarnation-assets/Recarnation-Presentation.pdf)
 
+
+## Project Report
+[View the Report as a PDF](recarnation-assets/report.pdf)
