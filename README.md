@@ -71,6 +71,5 @@ We have some secrets taken off from the repo. Please use the .env and settings.p
 [Watch the Demo](https://drive.google.com/file/d/1bQt8-tVCdFl4Yc_nGkXGL_pLMdftRrd6/view?usp=sharing)
 
 ## Presentation
-[View the presentation as a PDF](recarnation-assets/presentation.pdf)
-
+[View the presentation as a PDF](recarnation-assets/Recarnation Presentation.pdf)
 
