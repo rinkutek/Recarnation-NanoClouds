@@ -27,7 +27,7 @@ This application aspires to revolutionize the pre-owned car market by offering a
 
 ### **Required Features**
 1. **User Authentication**  
-   - Secure login and registration system with support for both standard credentials and OAuth.  
+   - Secure login and registration system with support for both standard credentials and OAuth 2.0.  
    - Ensures safe and easy access for all users.
 
 2. **Advanced Car Browsing**  
