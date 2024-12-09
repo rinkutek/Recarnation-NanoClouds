@@ -137,6 +137,9 @@ Below is a consolidated screenshot demonstrating the successful execution of var
 ![Functional Tests Screenshot](recarnation-assets/test.jpeg)  
 *Screenshot: Displays the passing results of key functional tests.*
 
+### Jenkins Output
+[View the Jenkins output](recarnation-assets/Jenkins_output.txt)
+
 ---
 
 By conducting these tests, we ensured that the application operates as intended, providing a reliable platform for buying and selling pre-owned cars.
