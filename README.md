@@ -148,7 +148,7 @@ By conducting these tests, we ensured that the application operates as intended,
 [Watch the Demo](https://drive.google.com/file/d/1bQt8-tVCdFl4Yc_nGkXGL_pLMdftRrd6/view?usp=sharing)
 
 ## Presentation
-[View the presentation as a PDF](recarnation-assets/Recarnation-Presentation.pdf)
+[View the presentation as a PDF](recarnation-assets/Project-report.pdf)
 
 
 ## Project Report
