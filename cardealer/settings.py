@@ -112,8 +112,8 @@ WSGI_APPLICATION = 'cardealer.wsgi.application'
 DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'cardealer_db',
-        'USER': 'vardb', 
+        'NAME': 'recarnation',
+        'USER': 'cardb', 
         'PASSWORD': 'temp_password', 
         'HOST': 'recarnation-db.cd2e84me0t5r.us-east-1.rds.amazonaws.com',
 		'PORT': '5432',
