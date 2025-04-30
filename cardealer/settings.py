@@ -115,7 +115,7 @@ DATABASES = {
         'NAME': 'cardealer_db',
         'USER': 'vardb', 
         'PASSWORD': 'temp_password', 
-        'HOST': 'recarnation-db.cd2e84me0t5r.us-east-1.rds.amazonaws.com:5432',
+        'HOST': 'recarnation-db.cd2e84me0t5r.us-east-1.rds.amazonaws.com',
 		'PORT': '5432',
         'OPTIONS': {
             'options': '-c timezone=UTC'  # Ensures all sessions use UTC
