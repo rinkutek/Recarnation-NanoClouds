@@ -228,7 +228,7 @@ OIDC_OP_USER_ENDPOINT = "https://trial-1988947.okta.com/oauth2/v1/userinfo"
 LOGIN_REDIRECT_URL = '/' # Redirect after login
 LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
 
-AWS_STORAGE_BUCKET_NAME = 'recarnation-frontend-3c6771c6f2b1d148' # From terraform output
+AWS_STORAGE_BUCKET_NAME = 'recarnation-frontend-41bd5d267ad31129' # From terraform output
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
