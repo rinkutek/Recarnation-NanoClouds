@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import dj_database_url
-from decouple import config
-
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -54,6 +52,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'storages',
 
     # Providers
     'allauth.socialaccount.providers.facebook',
@@ -96,13 +95,27 @@ WSGI_APPLICATION = 'cardealer.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#      'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'cardealer_db',
+#         'USER': 'postgres', 
+#         'PASSWORD': 'welcome@123', 
+#         'HOST': '127.0.0.1',
+# 		'PORT': '5432',
+#         'OPTIONS': {
+#             'options': '-c timezone=UTC'  # Ensures all sessions use UTC
+#         },
+#      }
+# }
+
 DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'cardealer_db',
-        'USER': 'postgres', 
-        'PASSWORD': 'welcome@123', 
-        'HOST': '127.0.0.1',
+        'USER': 'temp_password', 
+        'PASSWORD': 'temp_password', 
+        'HOST': 'recarnation-db.cd2e84me0t5r.us-east-1.rds.amazonaws.com:5432',
 		'PORT': '5432',
         'OPTIONS': {
             'options': '-c timezone=UTC'  # Ensures all sessions use UTC
@@ -174,19 +187,12 @@ ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True  # Automatically log in after email c
 ACCOUNT_ADAPTER = 'allauth.account.adapter.DefaultAccountAdapter'
 
 # Email backend for development (prints to console)
-#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # Your SMTP server
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'recarnationtechtitans@gmail.com'  # Your email address
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 SOCIALACCOUNT_LOGIN_ON_GET = True
 SOCIALACCOUNT_ADAPTER = 'allauth.socialaccount.adapter.DefaultSocialAccountAdapter'
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =  ""
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ""
+#SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =  ""
+#SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ""
 SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = "http://127.0.0.1:8000/accounts/social/login/google/google/login/callback/"
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -209,9 +215,20 @@ SOCIALACCOUNT_PROVIDERS = {
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',  # Default backend
     'allauth.account.auth_backends.AuthenticationBackend',  # Allauth backend
+    'mozilla_django_oidc.auth.OIDCAuthenticationBackend',
 )
+
+OIDC_RP_CLIENT_ID = "0oar0sd9n4GGqrD1y697"
+OIDC_RP_CLIENT_SECRET = "00sIHuFR78ma0_Qs3GjiqTPnaMrd7QtykjVdB12PkL"
+OIDC_OP_AUTHORIZATION_ENDPOINT = "https://trial-1988947.okta.com/oauth2/v1/authorize"
+OIDC_OP_TOKEN_ENDPOINT = "https://trial-1988947.okta.com/oauth2/v1/token"
+OIDC_OP_USER_ENDPOINT = "https://trial-1988947.okta.com/oauth2/v1/userinfo"
 
 # Optional settings for django-allauth
 LOGIN_REDIRECT_URL = '/' # Redirect after login
-LOGOUT_REDIRECT_URL = '/'  # Redirect after logout 
+LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
+
+AWS_STORAGE_BUCKET_NAME = 'recarnation-frontend-1f8e44d900236ee2' # From terraform output
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
