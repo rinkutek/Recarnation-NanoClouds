@@ -27,7 +27,7 @@ SECRET_KEY = '934nw3r62@!m0^ksgw3#31tntglnr%td+-_b89xpu2@q2zqv=d'
 DEBUG = True
 
 # ALLOWED_HOSTS = ['floating-badlands-41165.herokuapp.com', 'cardealerapp.co', 'www.cardealerapp.co', '127.0.0.1:8000']
-ALLOWED_HOSTS = ['198.211.99.20', 'localhost', '127.0.0.1', 'recarnation-env.eba-pjfzbsiv.us-east-1.elasticbeanstalk.com', 'trial-1988947.okta.com' ]
+ALLOWED_HOSTS = ['198.211.99.20', 'localhost', '127.0.0.1', 'recarnation-env.eba-iywfdcrf.us-east-1.elasticbeanstalk.com', 'trial-1988947.okta.com' ]
 
 LOGIN_REDIRECT_URL = '/dashboard/'
 
@@ -228,7 +228,7 @@ OIDC_OP_USER_ENDPOINT = "https://trial-1988947.okta.com/oauth2/v1/userinfo"
 LOGIN_REDIRECT_URL = '/' # Redirect after login
 LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
 
-AWS_STORAGE_BUCKET_NAME = 'recarnation-frontend-d90ee04b10ed7fad' # From terraform output
+AWS_STORAGE_BUCKET_NAME = 'recarnation-frontend-85a133eb5cfbc7ea' # From terraform output
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
