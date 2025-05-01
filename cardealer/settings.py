@@ -27,7 +27,7 @@ SECRET_KEY = '934nw3r62@!m0^ksgw3#31tntglnr%td+-_b89xpu2@q2zqv=d'
 DEBUG = True
 
 # ALLOWED_HOSTS = ['floating-badlands-41165.herokuapp.com', 'cardealerapp.co', 'www.cardealerapp.co', '127.0.0.1:8000']
-ALLOWED_HOSTS = ['198.211.99.20', 'localhost', '127.0.0.1', 'recarnation-env.eba-mrft77pz.us-east-1.elasticbeanstalk.com', 'trial-1988947.okta.com' ]
+ALLOWED_HOSTS = ['198.211.99.20', 'localhost', '127.0.0.1', 'recarnation-env.eba-back3cqb.us-east-1.elasticbeanstalk.com', 'trial-1988947.okta.com' ]
 
 LOGIN_REDIRECT_URL = '/dashboard/'
 
@@ -115,7 +115,7 @@ DATABASES = {
         'NAME': 'recarnation',
         'USER': 'cardb', 
         'PASSWORD': 'temp_password', 
-        'HOST': 'recarnation-db.cd2e84me0t5r.us-east-1.rds.amazonaws.com',
+        'HOST': 'recarnation-db.czwigqeq6m5s.us-east-1.rds.amazonaws.com',
 		'PORT': '5432',
         'OPTIONS': {
             'options': '-c timezone=UTC'  # Ensures all sessions use UTC
