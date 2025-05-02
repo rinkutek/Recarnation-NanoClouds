@@ -237,7 +237,7 @@ OIDC_RP_TOKEN_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/token" # The 
 OIDC_OP_USER_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/userinfo" # The OIDC userinfo endpoint
 OIDC_OP_TOKEN_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/token" # The OIDC token endpoint
 OIDC_OP_JWKS_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/keys" # The OIDC JWKS endpoint
-OIDC_RP_CALLBACK_URL = 'http://127.0.0.1:8000/authorization-code/callback/'
+OIDC_RP_CALLBACK_URL = 'http://recarnation-env.eba-iywfdcrf.us-east-1.elasticbeanstalk.com/authorization-code/callback/'
 
 # Optional settings for django-allauth
 LOGIN_REDIRECT_URL = '/' # Redirect after login
