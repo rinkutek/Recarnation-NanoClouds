@@ -230,7 +230,7 @@ LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
 
 AWS_STORAGE_BUCKET_NAME = 'recarnation-frontend-85a133eb5cfbc7ea' # From terraform output
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
