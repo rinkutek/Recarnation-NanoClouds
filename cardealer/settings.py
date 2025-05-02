@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'storages',
+    'mozilla_django_oidc',
 
     # Providers
     'allauth.socialaccount.providers.facebook',
@@ -218,11 +219,25 @@ AUTHENTICATION_BACKENDS = (
     'mozilla_django_oidc.auth.OIDCAuthenticationBackend',
 )
 
-OIDC_RP_CLIENT_ID = "0oar0sd9n4GGqrD1y697"
-OIDC_RP_CLIENT_SECRET = "00sIHuFR78ma0_Qs3GjiqTPnaMrd7QtykjVdB12PkL"
-OIDC_OP_AUTHORIZATION_ENDPOINT = "https://trial-1988947.okta.com/oauth2/v1/authorize"
-OIDC_OP_TOKEN_ENDPOINT = "https://trial-1988947.okta.com/oauth2/v1/token"
-OIDC_OP_USER_ENDPOINT = "https://trial-1988947.okta.com/oauth2/v1/userinfo"
+# OIDC_RP_CLIENT_ID = "0oar0sd9n4GGqrD1y697"
+# OIDC_RP_CLIENT_SECRET = "00sIHuFR78ma0_Qs3GjiqTPnaMrd7QtykjVdB12PkL"
+# OIDC_OP_AUTHORIZATION_ENDPOINT = "https://trial-1988947.okta.com/oauth2/v1/authorize"
+# OIDC_OP_TOKEN_ENDPOINT = "https://trial-1988947.okta.com/oauth2/v1/token"
+# OIDC_OP_USER_ENDPOINT = "https://trial-1988947.okta.com/oauth2/v1/userinfo"
+
+OKTA_DOMAIN =  "dev-10693315.okta.com"
+# OIDC_RP_CLIENT_ID = "0oar3j5tpyCZt1kXS697"
+OIDC_RP_CLIENT_ID = "0oaojxzladhNdfBYT5d7"
+
+# OIDC_RP_CLIENT_SECRET = "49TcpVVj3dXOkpHJJgqtxi4VzealsSYDeQoVbNYPZHftbo4_-eA9RR2lgOXtLDQM"
+OIDC_RP_CLIENT_SECRET ="X4Xib2ce5iFaDiNV2P5himnvmMH3YyTKXq7KeSB-PuHIkVE9E2mvZ9Cjtx4Mrxx3"
+OIDC_RP_SIGN_ALGO = "RS256"
+OIDC_OP_AUTHORIZATION_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/authorize" # The OIDC authorization endpoint
+OIDC_RP_TOKEN_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/token" # The OIDC token endpoint
+OIDC_OP_USER_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/userinfo" # The OIDC userinfo endpoint
+OIDC_OP_TOKEN_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/token" # The OIDC token endpoint
+OIDC_OP_JWKS_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/keys" # The OIDC JWKS endpoint
+OIDC_RP_CALLBACK_URL = 'http://127.0.0.1:8000/authorization-code/callback/'
 
 # Optional settings for django-allauth
 LOGIN_REDIRECT_URL = '/' # Redirect after login
