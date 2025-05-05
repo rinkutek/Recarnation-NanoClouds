@@ -178,7 +178,7 @@ MESSAGE_TAGS = {
 
 
 # Whitenoise settings
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Django Allauth settings for user account and authentication management
 ACCOUNT_EMAIL_REQUIRED = True  # Email is required for registration
