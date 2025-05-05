@@ -243,7 +243,7 @@ OIDC_RP_CALLBACK_URL = 'http://recarnation-env.eba-iywfdcrf.us-east-1.elasticbea
 LOGIN_REDIRECT_URL = '/' # Redirect after login
 LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
 
-AWS_STORAGE_BUCKET_NAME = 'recarnation-frontend-85a133eb5cfbc7ea' # From terraform output
+AWS_STORAGE_BUCKET_NAME = 'recarnation-frontend-857114650f65563c' # From terraform output
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
