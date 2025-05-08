@@ -30,7 +30,7 @@ pipeline {
             # Force clean workspace
             find . -mindepth 1 -delete || true
         '''
-                git branch: 'JenkinsCloud', 
+                git branch: 'develop', 
                 url: 'git@github.com:ApoorvaShastry10/Recarnation-TechTitansCloud.git',
                 credentialsId: 'jenkins-github-ssh'
             }
