@@ -4,8 +4,7 @@ from cars.models import Car
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.contrib import messages
-from .forms import CarForm
-from .car import w_calc,prepare_X
+from .forms import CarForm 
 import pandas as pd
 import numpy as np
 from django.contrib.auth.decorators import login_required
@@ -14,7 +13,7 @@ from contacts.models import Contact
 
 # Precompute weight coefficients for prediction
 # `w_0` is the intercept and `w` contains the weights for the model
-w_0 , w = w_calc()
+# w_0 , w = w_calc()
 
 # Function to display the homepage
 def home(request):
@@ -181,46 +180,45 @@ def contact(request):
 
     return render(request, 'pages/contact.html')
 
-# Function to predict car prices
+
+from django.shortcuts import render
+import pandas as pd
+import numpy as np
+from .car_used import model  # make sure car.py defines and exports the model
+
 def predict(request):
     """
-    Handles car price prediction.
-    - Accepts car attributes from a POST request.
-    - Prepares input data and applies the prediction model to estimate the price.
-    - Renders the prediction result on the same page.
+    Handles car price prediction from user input using the used_cars.csv-trained XGBoost model.
     """
-    if request.method =='POST':
-     
-        df ={
-            'make': request.POST['make'],
-            'model': request.POST['model'],
-            'year': int(request.POST['year']),
-            'engine_fuel_type': request.POST['engine_fuel_type'],
-            'engine_hp': int(request.POST['engine_hp']),
-            'engine_cylinders': int(request.POST['engine_cylinders']),
-            'transmission_type': request.POST['transmission_type'],
-            'driven_wheels': request.POST['driven_wheels'],
-            'number_of_doors': int(request.POST['number_of_doors']),
-            'market_category': request.POST['market_category'],
-            'vehicle_size': request.POST['vehicle_size'],
-            'vehicle_style': request.POST['vehicle_style'],
-            'highway_mpg': int(request.POST['highway_mpg']),
-            'city_mpg': int(request.POST['city_mpg']),
-            'popularity':int(request.POST['popularity']) ,
-            
-        }
-        
-        X_test = prepare_X(pd.DataFrame([df]))
-        y_pred = w_0 + X_test.dot(w)
-        price  = np.expm1(y_pred)[0].astype(int)
-        print(price)
-        
-        context = {
-            'price':price ,
-        }
-        
-        return render(request , 'pages/carprice.html',context)
+    if request.method == 'POST':
+        try:
+            # Collect form data
+            car_data = {
+                'brand': request.POST['brand'],
+                'model': request.POST['model'],
+                'fuel_type': request.POST['fuel_type'],
+                'engine': request.POST['engine'],
+                'transmission': request.POST['transmission'],
+                'ext_col': request.POST['ext_col'],
+                'int_col': request.POST['int_col'],
+                'accident': request.POST['accident'],
+                'clean_title': request.POST['clean_title'],
+                'milage': int(request.POST['milage']),
+                'age': 2024 - int(request.POST['model_year'])  # Derived from model_year
+            }
 
-    else:
-        
-        return render(request , 'pages/carprice.html')
+            # Convert to DataFrame
+            input_df = pd.DataFrame([car_data])
+
+            # Predict using model
+            log_price_pred = model.predict(input_df)[0]
+            predicted_price = int(np.expm1(log_price_pred)* 0.70)  # Convert from log price
+            context = {
+                'price': predicted_price
+            }
+            return render(request, 'pages/carprice.html', context)
+
+        except Exception as e:
+            return render(request, 'pages/carprice.html', {'error': str(e)})
+
+    return render(request, 'pages/carprice.html')
