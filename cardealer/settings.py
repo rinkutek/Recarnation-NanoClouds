@@ -16,7 +16,6 @@ import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -237,7 +236,7 @@ OIDC_RP_TOKEN_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/token" # The 
 OIDC_OP_USER_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/userinfo" # The OIDC userinfo endpoint
 OIDC_OP_TOKEN_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/token" # The OIDC token endpoint
 OIDC_OP_JWKS_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/keys" # The OIDC JWKS endpoint
-OIDC_RP_CALLBACK_URL = 'http://recarnation-env.eba-iywfdcrf.us-east-1.elasticbeanstalk.com/authorization-code/callback/'
+OIDC_RP_CALLBACK_URL = 'http://recarnation-env.eba-9q4kewpk.us-east-1.elasticbeanstalk.com/authorization-code/callback/'
 
 # Optional settings for django-allauth
 LOGIN_REDIRECT_URL = '/' # Redirect after login
@@ -247,6 +246,6 @@ AWS_STORAGE_BUCKET_NAME = 'recarnation-frontend-857114650f65563c' # From terrafo
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
