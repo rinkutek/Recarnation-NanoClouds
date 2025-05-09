@@ -26,7 +26,7 @@ The application is robust, flexible, and prepared for real-world usage. It aims 
 ## Authors
 - [Ananya Praveen Shetty](https://github.com/ananya101001)
 - [Apoorva Shastry](https://github.com/ApoorvaShastry10)
-- [Junie Mariam Varghes](https://github.com/juniemariam)
+- [Junie Mariam Varghese](https://github.com/juniemariam)
 - [Rinku Techchandani](https://github.com/rinkutek)
 
 ## Features & Implementation
