@@ -1,94 +1,159 @@
 pipeline {
-    agent any
-
-    environment {
-        PYTHON_VERSION = '3.8'
-        VENV_NAME = 'venv'
-        DJANGO_SETTINGS_MODULE = 'cardealer.settings'
+    agent {
+        docker {
+            image 'python:3.9-slim-buster'
+            args '-u root -v $HOME/.aws:/root/.aws'
+        }
     }
-
+    // triggers {
+    //     GitHubPushTrigger {
+    //         branches {
+    //             branch {
+    //                 compareType 'PLAIN'
+    //                 pattern 'JenkinsCloud'
+    //             }
+    //         }
+    //         githubAppCredentialsId 'jenkins-github-ssh'
+    //     }
+    //     pollSCM('H/5 * * * *')
+    // }
+    environment {
+        AWS_REGION = 'us-east-1'
+        APPLICATION_NAME = 'recarnation-app'
+        ENVIRONMENT_NAME = 'recarnation-env'
+        EB_PLATFORM = 'Python 3.11'
+    }
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                sh '''
+            # Force clean workspace
+            find . -mindepth 1 -delete || true
+        '''
+                git branch: 'develop', 
+                url: 'git@github.com:ApoorvaShastry10/Recarnation-TechTitansCloud.git',
+                credentialsId: 'jenkins-github-ssh'
             }
         }
 
-        stage('Setup Python Environment') {
+        stage('Setup Environment') {
             steps {
-                bat """
-                    if not exist ${VENV_NAME} python -m venv ${VENV_NAME}
-                    call ${VENV_NAME}\\Scripts\\activate.bat
-                    python -m pip install --upgrade pip setuptools wheel
-                    pip install django-ckeditor==6.3.2
-                    pip install Django==3.2.23
-                    pip install psycopg2-binary
-                    pip install -r requirements.txt --no-deps
-                    pip install -r requirements.txt
-                """
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                bat """
-                    call ${VENV_NAME}\\Scripts\\activate.bat
-                    set PYTHONPATH=%WORKSPACE%
-                    python manage.py test || exit 0
-                """
-            }
-        }
-
-        stage('Static Code Analysis') {
-            steps {
-                bat """
-                    call ${VENV_NAME}\\Scripts\\activate.bat
-                    pip install pylint flake8 pylint-django
+                sh '''
+                    # Install essential tools
+                    apt-get update && apt-get install -y git
+                    git config --global --add safe.directory '*'
                     
-                    rem Only analyze project files, exclude venv and migrations
-                    pylint --load-plugins pylint_django --ignore=venv,*/migrations/* cardealer || exit 0
-                    flake8 cardealer --exclude=venv,*/migrations/* || exit 0
-                """
+                    # Create fresh virtual environment
+                    python -m venv venv
+                    . venv/bin/activate
+                    pip install --upgrade pip setuptools wheel
+                '''
             }
         }
 
-        stage('Collect Static Files') {
+        stage('Install Dependencies') {
             steps {
-                bat """
-                    call ${VENV_NAME}\\Scripts\\activate.bat
-                    python manage.py collectstatic --noinput -v 0 || exit 0
-                """
+                sh '''
+                    . venv/bin/activate
+                    pip install --upgrade pip
+                    pip install -c constraints.txt -r requirements.txt
+                '''
+
             }
         }
-
-        stage('Database Migrations') {
+        
+        stage('Install EB CLI') {
             steps {
-                bat """
-                    call ${VENV_NAME}\\Scripts\\activate.bat
-                    python manage.py migrate --noinput || exit 0
-                """
+                sh '''
+                    . venv/bin/activate
+                    pip install awsebcli==3.20.3
+                    eb --version
+                '''
             }
         }
-
-        stage('Deploy') {
+        
+        stage('Initialize EB') {
             steps {
-                bat """
-                    call ${VENV_NAME}\\Scripts\\activate.bat
-                    echo "Deploying application..."
-                """
+                withAWS(credentials: 'aws-creds', region: 'us-east-1') {
+                    sh '''
+                        . venv/bin/activate
+                        eb init "$APPLICATION_NAME" \
+                            --platform "$EB_PLATFORM" \
+                            --region "$AWS_REGION" \
+                            --tags "environment=production,team=devops" \
+                            --no-verify
+                    '''
+                }
+            }
+        }
+        
+        stage('Verify Permissions') {
+            steps {
+                withAWS(credentials: 'aws-creds', region: 'us-east-1') {
+                    sh '''
+                        . venv/bin/activate
+                        # Test required permissions
+                        aws cloudformation get-template --stack-name "awseb-e-${ENVIRONMENT_NAME}-stack" --output text || \
+                            echo "Warning: Missing CloudFormation permissions - update IAM policy"
+                    '''
+                }
+            }
+        }
+        
+        stage('Safe Deploy') {
+            steps {
+                withAWS(credentials: 'aws-creds', region: 'us-east-1') {
+                    sh '''#!/bin/bash
+set -e
+
+. venv/bin/activate
+echo "Current directory: $(pwd)"
+# 1. Wait for environment to be ready
+echo "Checking environment status..."
+end_time=$((SECONDS+1800)) # 30 minute timeout
+
+while [ $SECONDS -lt $end_time ]; do
+    status=$(eb status "$ENVIRONMENT_NAME" | grep "Status:" | awk '{print $2}')
+    [ "$status" = "Ready" ] && break
+    echo "Current status: $status - waiting..."
+    sleep 30
+done
+
+# 2. Standard deploy with retry logic
+max_retries=3
+attempt=1
+
+while [ $attempt -le $max_retries ]; do
+    echo "Attempt $attempt of $max_retries"
+    if eb deploy "$ENVIRONMENT_NAME" --timeout 45; then
+        echo "Deployment succeeded"
+        break
+    else
+        echo "Deployment failed, retrying..."
+        sleep 30
+        attempt=$((attempt + 1))
+    fi
+done
+
+# 3. Final verification
+eb health --refresh
+[ $attempt -gt $max_retries ] && exit 1
+'''
+// sh '''
+//             zip -r my-custom-name.zip .
+//             eb deploy "$ENVIRONMENT_NAME" --label my-custom-name
+//         '''
+
+                }
             }
         }
     }
-
+    
     post {
         always {
-            cleanWs()
-        }
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed!'
+            sh '''
+                rm -rf venv
+            '''
         }
     }
 }

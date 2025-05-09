@@ -12,12 +12,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import dj_database_url
-from decouple import config
-
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -29,8 +26,8 @@ SECRET_KEY = '934nw3r62@!m0^ksgw3#31tntglnr%td+-_b89xpu2@q2zqv=d'
 DEBUG = True
 
 # ALLOWED_HOSTS = ['floating-badlands-41165.herokuapp.com', 'cardealerapp.co', 'www.cardealerapp.co', '127.0.0.1:8000']
-ALLOWED_HOSTS = ['198.211.99.20', 'localhost', '127.0.0.1']
-
+# ALLOWED_HOSTS = ['198.211.99.20', 'localhost', '127.0.0.1', 'recarnation-env.eba-iywfdcrf.us-east-1.elasticbeanstalk.com', 'trial-1988947.okta.com' ]
+ALLOWED_HOSTS = ['*']
 LOGIN_REDIRECT_URL = '/dashboard/'
 
 SITE_ID = 1
@@ -54,6 +51,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'storages',
+    'mozilla_django_oidc',
 
     # Providers
     'allauth.socialaccount.providers.facebook',
@@ -96,13 +95,27 @@ WSGI_APPLICATION = 'cardealer.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#      'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'cardealer_db',
+#         'USER': 'postgres', 
+#         'PASSWORD': 'welcome@123', 
+#         'HOST': '127.0.0.1',
+# 		'PORT': '5432',
+#         'OPTIONS': {
+#             'options': '-c timezone=UTC'  # Ensures all sessions use UTC
+#         },
+#      }
+# }
+
 DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'cardealer_db',
-        'USER': 'postgres', 
-        'PASSWORD': 'welcome@123', 
-        'HOST': '127.0.0.1',
+        'NAME': 'recarnation',
+        'USER': 'cardb', 
+        'PASSWORD': 'temp_password', 
+        'HOST': 'recarnation-db.cd2e84me0t5r.us-east-1.rds.amazonaws.com',
 		'PORT': '5432',
         'OPTIONS': {
             'options': '-c timezone=UTC'  # Ensures all sessions use UTC
@@ -164,7 +177,7 @@ MESSAGE_TAGS = {
 
 
 # Whitenoise settings
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Django Allauth settings for user account and authentication management
 ACCOUNT_EMAIL_REQUIRED = True  # Email is required for registration
@@ -174,19 +187,12 @@ ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True  # Automatically log in after email c
 ACCOUNT_ADAPTER = 'allauth.account.adapter.DefaultAccountAdapter'
 
 # Email backend for development (prints to console)
-#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # Your SMTP server
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'recarnationtechtitans@gmail.com'  # Your email address
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 SOCIALACCOUNT_LOGIN_ON_GET = True
 SOCIALACCOUNT_ADAPTER = 'allauth.socialaccount.adapter.DefaultSocialAccountAdapter'
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =  ""
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ""
+#SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =  ""
+#SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ""
 SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = "http://127.0.0.1:8000/accounts/social/login/google/google/login/callback/"
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -209,9 +215,37 @@ SOCIALACCOUNT_PROVIDERS = {
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',  # Default backend
     'allauth.account.auth_backends.AuthenticationBackend',  # Allauth backend
+    'mozilla_django_oidc.auth.OIDCAuthenticationBackend',
 )
+
+# OIDC_RP_CLIENT_ID = "0oar0sd9n4GGqrD1y697"
+# OIDC_RP_CLIENT_SECRET = "00sIHuFR78ma0_Qs3GjiqTPnaMrd7QtykjVdB12PkL"
+# OIDC_OP_AUTHORIZATION_ENDPOINT = "https://trial-1988947.okta.com/oauth2/v1/authorize"
+# OIDC_OP_TOKEN_ENDPOINT = "https://trial-1988947.okta.com/oauth2/v1/token"
+# OIDC_OP_USER_ENDPOINT = "https://trial-1988947.okta.com/oauth2/v1/userinfo"
+
+OKTA_DOMAIN =  "dev-10693315.okta.com"
+# OIDC_RP_CLIENT_ID = "0oar3j5tpyCZt1kXS697"
+OIDC_RP_CLIENT_ID = "0oaojxzladhNdfBYT5d7"
+
+# OIDC_RP_CLIENT_SECRET = "49TcpVVj3dXOkpHJJgqtxi4VzealsSYDeQoVbNYPZHftbo4_-eA9RR2lgOXtLDQM"
+OIDC_RP_CLIENT_SECRET ="X4Xib2ce5iFaDiNV2P5himnvmMH3YyTKXq7KeSB-PuHIkVE9E2mvZ9Cjtx4Mrxx3"
+OIDC_RP_SIGN_ALGO = "RS256"
+OIDC_OP_AUTHORIZATION_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/authorize" # The OIDC authorization endpoint
+OIDC_RP_TOKEN_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/token" # The OIDC token endpoint
+OIDC_OP_USER_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/userinfo" # The OIDC userinfo endpoint
+OIDC_OP_TOKEN_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/token" # The OIDC token endpoint
+OIDC_OP_JWKS_ENDPOINT = f"https://{OKTA_DOMAIN}/oauth2/default/v1/keys" # The OIDC JWKS endpoint
+OIDC_RP_CALLBACK_URL = 'http://recarnation-env.eba-9q4kewpk.us-east-1.elasticbeanstalk.com/authorization-code/callback/'
 
 # Optional settings for django-allauth
 LOGIN_REDIRECT_URL = '/' # Redirect after login
-LOGOUT_REDIRECT_URL = '/'  # Redirect after logout 
+LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
 
+AWS_STORAGE_BUCKET_NAME = 'recarnation-frontend-857114650f65563c' # From terraform output
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

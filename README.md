@@ -17,11 +17,10 @@ This application aspires to revolutionize the pre-owned car market by offering a
 
 
 ## Authors
-
+- [Ananya Praveen Shetty](https://github.com/ananya101001)
 - [Apoorva Shastry](https://github.com/ApoorvaShastry10)
 - [Junie Mariam Varghes](https://github.com/juniemariam)
 - [Rinku Techchandani](https://github.com/rinkutek)
-- [Nitya Reddy]()
 
 ## Features & Implementation
 
