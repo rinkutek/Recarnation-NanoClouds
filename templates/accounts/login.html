@@ -41,11 +41,14 @@
                         <!-- OAuth Login -->
                         <div class="text-center mt-3">
                             <p>Or</p>
-                            <a href="{% url 'google_login' %}" class="btn btn-primary btn-block mt-3">
-                                Login with Google
-                            </a>
-                            
                         </div>
+                        <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}                    
+                        <a href="{% url 'oidc_authentication_init' %}" class="btn btn-primary btn-block mt-3">
+                            Log In with Okta
+                        </a>
+                        </form>
                         <!-- Register Link -->
                         <div class="text-center mt-3">
                             <p>Don't have an account? 

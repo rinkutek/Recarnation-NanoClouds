@@ -1,0 +1,2415 @@
+{
+  "version": 4,
+  "terraform_version": "1.9.5",
+  "serial": 934,
+  "lineage": "8cbfbd3a-a489-d0e9-059e-6bbb62a13ade",
+  "outputs": {
+    "database_endpoint": {
+      "value": "recarnation-db.cd2e84me0t5r.us-east-1.rds.amazonaws.com:5432",
+      "type": "string"
+    },
+    "elastic_beanstalk_url": {
+      "value": "recarnation-env.eba-keekppae.us-east-1.elasticbeanstalk.com",
+      "type": "string"
+    },
+    "frontend_url": {
+      "value": "d1pnhzsq8ocz1s.cloudfront.net",
+      "type": "string"
+    },
+    "jenkins_public_ip": {
+      "value": "54.86.186.35",
+      "type": "string"
+    },
+    "okta_client_id": {
+      "value": "0oar8u4y49QbLAHbu697",
+      "type": "string"
+    },
+    "okta_client_secret": {
+      "value": "c58uo3gHCkQ7QsAnx4VRR4ufkxj6zNiRfcvSH026sQIDB6rCSLsgNOvV1zW4mLZp",
+      "type": "string",
+      "sensitive": true
+    }
+  },
+  "resources": [
+    {
+      "mode": "data",
+      "type": "aws_availability_zones",
+      "name": "available",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "all_availability_zones": null,
+            "exclude_names": null,
+            "exclude_zone_ids": null,
+            "filter": null,
+            "group_names": [
+              "us-east-1-zg-1"
+            ],
+            "id": "us-east-1",
+            "names": [
+              "us-east-1a",
+              "us-east-1b",
+              "us-east-1c",
+              "us-east-1d",
+              "us-east-1e",
+              "us-east-1f"
+            ],
+            "state": "available",
+            "timeouts": null,
+            "zone_ids": [
+              "use1-az2",
+              "use1-az4",
+              "use1-az6",
+              "use1-az1",
+              "use1-az3",
+              "use1-az5"
+            ]
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_elastic_beanstalk_solution_stack",
+      "name": "python",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "64bit Amazon Linux 2023 v4.5.1 running Python 3.11",
+            "most_recent": true,
+            "name": "64bit Amazon Linux 2023 v4.5.1 running Python 3.11",
+            "name_regex": "^64bit Amazon Linux 2.* running Python 3.11"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "http",
+      "name": "my_ip",
+      "provider": "provider[\"registry.terraform.io/hashicorp/http\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "body": "73.202.223.100",
+            "ca_cert_pem": null,
+            "client_cert_pem": null,
+            "client_key_pem": null,
+            "id": "https://api.ipify.org",
+            "insecure": null,
+            "method": null,
+            "request_body": null,
+            "request_headers": null,
+            "request_timeout_ms": null,
+            "response_body": "73.202.223.100",
+            "response_body_base64": "NzMuMjAyLjIyMy4xMDA=",
+            "response_headers": {
+              "Cf-Cache-Status": "DYNAMIC",
+              "Cf-Ray": "93c2c397fb7c08e6-LAX",
+              "Content-Length": "14",
+              "Content-Type": "text/plain",
+              "Date": "Wed, 07 May 2025 18:26:09 GMT",
+              "Server": "cloudflare",
+              "Server-Timing": "cfL4;desc=\"?proto=TCP\u0026rtt=30269\u0026min_rtt=25226\u0026rtt_var=8764\u0026sent=7\u0026recv=10\u0026lost=0\u0026retrans=0\u0026sent_bytes=4257\u0026recv_bytes=1740\u0026delivery_rate=148294\u0026cwnd=222\u0026unsent_bytes=0\u0026cid=3e1857e3f6d08978\u0026ts=125\u0026x=0\"",
+              "Vary": "Origin"
+            },
+            "retry": null,
+            "status_code": 200,
+            "url": "https://api.ipify.org"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudfront_distribution",
+      "name": "recarnation_distribution",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "aliases": null,
+            "arn": "arn:aws:cloudfront::051826708196:distribution/E3SXETH4XNP4DQ",
+            "caller_reference": "terraform-20250507182620739800000002",
+            "comment": null,
+            "continuous_deployment_policy_id": "",
+            "custom_error_response": [],
+            "default_cache_behavior": [
+              {
+                "allowed_methods": [
+                  "GET",
+                  "HEAD"
+                ],
+                "cache_policy_id": "",
+                "cached_methods": [
+                  "GET",
+                  "HEAD"
+                ],
+                "compress": false,
+                "default_ttl": 3600,
+                "field_level_encryption_id": "",
+                "forwarded_values": [
+                  {
+                    "cookies": [
+                      {
+                        "forward": "none",
+                        "whitelisted_names": []
+                      }
+                    ],
+                    "headers": [],
+                    "query_string": false,
+                    "query_string_cache_keys": []
+                  }
+                ],
+                "function_association": [],
+                "grpc_config": [
+                  {
+                    "enabled": false
+                  }
+                ],
+                "lambda_function_association": [],
+                "max_ttl": 86400,
+                "min_ttl": 0,
+                "origin_request_policy_id": "",
+                "realtime_log_config_arn": "",
+                "response_headers_policy_id": "",
+                "smooth_streaming": false,
+                "target_origin_id": "S3-recarnation-frontend-af0e296b95a0a9bc",
+                "trusted_key_groups": [],
+                "trusted_signers": [],
+                "viewer_protocol_policy": "redirect-to-https"
+              }
+            ],
+            "default_root_object": "index.html",
+            "domain_name": "d1pnhzsq8ocz1s.cloudfront.net",
+            "enabled": true,
+            "etag": "E1CQSP508ZFB2E",
+            "hosted_zone_id": "Z2FDTNDATAQYW2",
+            "http_version": "http2",
+            "id": "E3SXETH4XNP4DQ",
+            "in_progress_validation_batches": 0,
+            "is_ipv6_enabled": true,
+            "last_modified_time": "2025-05-07 18:26:19.862 +0000 UTC",
+            "logging_config": [],
+            "ordered_cache_behavior": [],
+            "origin": [
+              {
+                "connection_attempts": 3,
+                "connection_timeout": 10,
+                "custom_header": [],
+                "custom_origin_config": [],
+                "domain_name": "recarnation-frontend-af0e296b95a0a9bc.s3.us-east-1.amazonaws.com",
+                "origin_access_control_id": "",
+                "origin_id": "S3-recarnation-frontend-af0e296b95a0a9bc",
+                "origin_path": "",
+                "origin_shield": [],
+                "s3_origin_config": [
+                  {
+                    "origin_access_identity": "origin-access-identity/cloudfront/E34G44MRE3IQ30"
+                  }
+                ],
+                "vpc_origin_config": []
+              }
+            ],
+            "origin_group": [],
+            "price_class": "PriceClass_All",
+            "restrictions": [
+              {
+                "geo_restriction": [
+                  {
+                    "locations": [],
+                    "restriction_type": "none"
+                  }
+                ]
+              }
+            ],
+            "retain_on_delete": false,
+            "staging": false,
+            "status": "Deployed",
+            "tags": null,
+            "tags_all": {},
+            "trusted_key_groups": [
+              {
+                "enabled": false,
+                "items": []
+              }
+            ],
+            "trusted_signers": [
+              {
+                "enabled": false,
+                "items": []
+              }
+            ],
+            "viewer_certificate": [
+              {
+                "acm_certificate_arn": "",
+                "cloudfront_default_certificate": true,
+                "iam_certificate_id": "",
+                "minimum_protocol_version": "TLSv1",
+                "ssl_support_method": ""
+              }
+            ],
+            "wait_for_deployment": true,
+            "web_acl_id": ""
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_cloudfront_origin_access_identity.recarnation_oai",
+            "aws_s3_bucket.recarnation_frontend",
+            "random_id.bucket_suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudfront_origin_access_identity",
+      "name": "recarnation_oai",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:cloudfront::051826708196:origin-access-identity/E34G44MRE3IQ30",
+            "caller_reference": "terraform-20250507182618406600000001",
+            "cloudfront_access_identity_path": "origin-access-identity/cloudfront/E34G44MRE3IQ30",
+            "comment": "OAI for Recarnation frontend",
+            "etag": "E2LIETLV2XH1TQ",
+            "iam_arn": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E34G44MRE3IQ30",
+            "id": "E34G44MRE3IQ30",
+            "s3_canonical_user_id": "5541fb0d6f8b8100b721274ccbdc789e1b4dbd87369c3947a0399d721502a1527769c1a2013fccb9fc0e8230246cd537"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_db_instance",
+      "name": "recarnation_db",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "address": "recarnation-db.cd2e84me0t5r.us-east-1.rds.amazonaws.com",
+            "allocated_storage": 20,
+            "allow_major_version_upgrade": null,
+            "apply_immediately": false,
+            "arn": "arn:aws:rds:us-east-1:051826708196:db:recarnation-db",
+            "auto_minor_version_upgrade": true,
+            "availability_zone": "us-east-1b",
+            "backup_retention_period": 0,
+            "backup_target": "region",
+            "backup_window": "04:00-04:30",
+            "blue_green_update": [],
+            "ca_cert_identifier": "rds-ca-rsa2048-g1",
+            "character_set_name": "",
+            "copy_tags_to_snapshot": false,
+            "custom_iam_instance_profile": "",
+            "customer_owned_ip_enabled": false,
+            "database_insights_mode": "standard",
+            "db_name": "recarnation",
+            "db_subnet_group_name": "recarnation-db-subnet-group",
+            "dedicated_log_volume": false,
+            "delete_automated_backups": true,
+            "deletion_protection": false,
+            "domain": "",
+            "domain_auth_secret_arn": "",
+            "domain_dns_ips": null,
+            "domain_fqdn": "",
+            "domain_iam_role_name": "",
+            "domain_ou": "",
+            "enabled_cloudwatch_logs_exports": null,
+            "endpoint": "recarnation-db.cd2e84me0t5r.us-east-1.rds.amazonaws.com:5432",
+            "engine": "postgres",
+            "engine_lifecycle_support": "open-source-rds-extended-support",
+            "engine_version": "15.7",
+            "engine_version_actual": "15.7",
+            "final_snapshot_identifier": null,
+            "hosted_zone_id": "Z2R2ITUGPM61AM",
+            "iam_database_authentication_enabled": false,
+            "id": "db-LFQBPJ34RFPSYDC7YU3VFARZOI",
+            "identifier": "recarnation-db",
+            "identifier_prefix": "",
+            "instance_class": "db.t3.micro",
+            "iops": 0,
+            "kms_key_id": "",
+            "latest_restorable_time": "",
+            "license_model": "postgresql-license",
+            "listener_endpoint": [],
+            "maintenance_window": "mon:06:36-mon:07:06",
+            "manage_master_user_password": null,
+            "master_user_secret": [],
+            "master_user_secret_kms_key_id": null,
+            "max_allocated_storage": 0,
+            "monitoring_interval": 0,
+            "monitoring_role_arn": "",
+            "multi_az": false,
+            "nchar_character_set_name": "",
+            "network_type": "IPV4",
+            "option_group_name": "default:postgres-15",
+            "parameter_group_name": "default.postgres15",
+            "password": "temp_password",
+            "password_wo": null,
+            "password_wo_version": null,
+            "performance_insights_enabled": false,
+            "performance_insights_kms_key_id": "",
+            "performance_insights_retention_period": 0,
+            "port": 5432,
+            "publicly_accessible": false,
+            "replica_mode": "",
+            "replicas": [],
+            "replicate_source_db": "",
+            "resource_id": "db-LFQBPJ34RFPSYDC7YU3VFARZOI",
+            "restore_to_point_in_time": [],
+            "s3_import": [],
+            "skip_final_snapshot": true,
+            "snapshot_identifier": null,
+            "status": "available",
+            "storage_encrypted": false,
+            "storage_throughput": 0,
+            "storage_type": "gp2",
+            "tags": null,
+            "tags_all": {},
+            "timeouts": null,
+            "timezone": "",
+            "upgrade_storage_config": null,
+            "username": "cardb",
+            "vpc_security_group_ids": [
+              "sg-05779f221b469ec88"
+            ]
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "password_wo"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "password"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "username"
+              }
+            ]
+          ],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInVwZGF0ZSI6NDgwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMiJ9",
+          "dependencies": [
+            "aws_db_subnet_group.recarnation_subnet_group",
+            "aws_security_group.jenkins_sg",
+            "aws_security_group.rds_sg",
+            "aws_subnet.private",
+            "aws_vpc.recarnation_vpc",
+            "data.aws_availability_zones.available",
+            "data.http.my_ip"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_db_subnet_group",
+      "name": "recarnation_subnet_group",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:rds:us-east-1:051826708196:subgrp:recarnation-db-subnet-group",
+            "description": "Managed by Terraform",
+            "id": "recarnation-db-subnet-group",
+            "name": "recarnation-db-subnet-group",
+            "name_prefix": "",
+            "subnet_ids": [
+              "subnet-0745f652bde66e07d",
+              "subnet-092a6a187cc7bdd43"
+            ],
+            "supported_network_types": [
+              "IPV4"
+            ],
+            "tags": {
+              "Name": "Recarnation DB Subnet Group"
+            },
+            "tags_all": {
+              "Name": "Recarnation DB Subnet Group"
+            },
+            "vpc_id": "vpc-07cc4e9313b08ce25"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_subnet.private",
+            "aws_vpc.recarnation_vpc",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_eip",
+      "name": "jenkins_eip",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address": null,
+            "allocation_id": "eipalloc-022837974dbdb67f4",
+            "arn": "arn:aws:ec2:us-east-1:051826708196:elastic-ip/eipalloc-022837974dbdb67f4",
+            "associate_with_private_ip": null,
+            "association_id": "eipassoc-0ec57403557d643b2",
+            "carrier_ip": "",
+            "customer_owned_ip": "",
+            "customer_owned_ipv4_pool": "",
+            "domain": "vpc",
+            "id": "eipalloc-022837974dbdb67f4",
+            "instance": "i-0164f0db4b6253baa",
+            "ipam_pool_id": null,
+            "network_border_group": "us-east-1",
+            "network_interface": "eni-0479e10232773c215",
+            "private_dns": "ip-10-0-1-242.ec2.internal",
+            "private_ip": "10.0.1.242",
+            "ptr_record": "",
+            "public_dns": "ec2-3-228-107-182.compute-1.amazonaws.com",
+            "public_ip": "3.228.107.182",
+            "public_ipv4_pool": "amazon",
+            "tags": {
+              "Name": "Jenkins-EIP"
+            },
+            "tags_all": {
+              "Name": "Jenkins-EIP"
+            },
+            "timeouts": null,
+            "vpc": true
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjoxODAwMDAwMDAwMDAsInJlYWQiOjkwMDAwMDAwMDAwMCwidXBkYXRlIjozMDAwMDAwMDAwMDB9fQ==",
+          "dependencies": [
+            "aws_instance.jenkins",
+            "aws_key_pair.jenkins_key",
+            "aws_security_group.jenkins_sg",
+            "aws_subnet.public",
+            "aws_vpc.recarnation_vpc",
+            "data.aws_availability_zones.available",
+            "data.http.my_ip"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_elastic_beanstalk_application",
+      "name": "recarnation",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "appversion_lifecycle": [],
+            "arn": "arn:aws:elasticbeanstalk:us-east-1:051826708196:application/recarnation-app",
+            "description": "Recarnation Django application",
+            "id": "recarnation-app",
+            "name": "recarnation-app",
+            "tags": null,
+            "tags_all": {}
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_elastic_beanstalk_environment",
+      "name": "recarnation_env",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "all_settings": [
+              {
+                "name": "AppSource",
+                "namespace": "aws:cloudformation:template:parameter",
+                "resource": "",
+                "value": "https://elasticbeanstalk-platform-assets-us-east-1.s3.amazonaws.com/stalks/eb_python311_amazon_linux_2023_1.0.705.0_20250417211222/sampleapp/EBSampleApp-Python.zip"
+              },
+              {
+                "name": "Application Healthcheck URL",
+                "namespace": "aws:elasticbeanstalk:application",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "AssociatePublicIpAddress",
+                "namespace": "aws:ec2:vpc",
+                "resource": "",
+                "value": "true"
+              },
+              {
+                "name": "Automatically Terminate Unhealthy Instances",
+                "namespace": "aws:elasticbeanstalk:monitoring",
+                "resource": "",
+                "value": "true"
+              },
+              {
+                "name": "Availability Zones",
+                "namespace": "aws:autoscaling:asg",
+                "resource": "",
+                "value": "Any"
+              },
+              {
+                "name": "BatchSize",
+                "namespace": "aws:elasticbeanstalk:command",
+                "resource": "",
+                "value": "100"
+              },
+              {
+                "name": "BatchSizeType",
+                "namespace": "aws:elasticbeanstalk:command",
+                "resource": "",
+                "value": "Percentage"
+              },
+              {
+                "name": "BlockDeviceMappings",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "ConfigDocument",
+                "namespace": "aws:elasticbeanstalk:healthreporting:system",
+                "resource": "",
+                "value": "{\"Version\":1,\"CloudWatchMetrics\":{\"Instance\":{\"CPUIrq\":null,\"LoadAverage5min\":null,\"ApplicationRequests5xx\":null,\"ApplicationRequests4xx\":null,\"CPUUser\":null,\"LoadAverage1min\":null,\"ApplicationLatencyP50\":null,\"CPUIdle\":null,\"InstanceHealth\":null,\"ApplicationLatencyP95\":null,\"ApplicationLatencyP85\":null,\"RootFilesystemUtil\":null,\"ApplicationLatencyP90\":null,\"CPUSystem\":null,\"ApplicationLatencyP75\":null,\"CPUSoftirq\":null,\"ApplicationLatencyP10\":null,\"ApplicationLatencyP99\":null,\"ApplicationRequestsTotal\":null,\"ApplicationLatencyP99.9\":null,\"ApplicationRequests3xx\":null,\"ApplicationRequests2xx\":null,\"CPUIowait\":null,\"CPUNice\":null},\"Environment\":{\"InstancesSevere\":null,\"InstancesDegraded\":null,\"ApplicationRequests5xx\":null,\"ApplicationRequests4xx\":null,\"ApplicationLatencyP50\":null,\"ApplicationLatencyP95\":null,\"ApplicationLatencyP85\":null,\"InstancesUnknown\":null,\"ApplicationLatencyP90\":null,\"InstancesInfo\":null,\"InstancesPending\":null,\"ApplicationLatencyP75\":null,\"ApplicationLatencyP10\":null,\"ApplicationLatencyP99\":null,\"ApplicationRequestsTotal\":null,\"InstancesNoData\":null,\"ApplicationLatencyP99.9\":null,\"ApplicationRequests3xx\":null,\"ApplicationRequests2xx\":null,\"InstancesOk\":null,\"InstancesWarning\":null}}}"
+              },
+              {
+                "name": "Cooldown",
+                "namespace": "aws:autoscaling:asg",
+                "resource": "",
+                "value": "360"
+              },
+              {
+                "name": "Custom Availability Zones",
+                "namespace": "aws:autoscaling:asg",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "DATABASE_URL",
+                "namespace": "aws:elasticbeanstalk:application:environment",
+                "resource": "",
+                "value": "postgres://cardb:temp_password@recarnation-db.cd2e84me0t5r.us-east-1.rds.amazonaws.com:5432/recarnation"
+              },
+              {
+                "name": "DJANGO_SETTINGS_MODULE",
+                "namespace": "aws:elasticbeanstalk:application:environment",
+                "resource": "",
+                "value": "recarnation.settings.production"
+              },
+              {
+                "name": "DefaultSSHPort",
+                "namespace": "aws:elasticbeanstalk:control",
+                "resource": "",
+                "value": "22"
+              },
+              {
+                "name": "DeleteOnTerminate",
+                "namespace": "aws:elasticbeanstalk:cloudwatch:logs",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "DeleteOnTerminate",
+                "namespace": "aws:elasticbeanstalk:cloudwatch:logs:health",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "DeploymentPolicy",
+                "namespace": "aws:elasticbeanstalk:command",
+                "resource": "",
+                "value": "AllAtOnce"
+              },
+              {
+                "name": "DisableDefaultEC2SecurityGroup",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "DisableIMDSv1",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "true"
+              },
+              {
+                "name": "EC2KeyName",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "ELBScheme",
+                "namespace": "aws:ec2:vpc",
+                "resource": "",
+                "value": "public"
+              },
+              {
+                "name": "ELBSubnets",
+                "namespace": "aws:ec2:vpc",
+                "resource": "",
+                "value": "subnet-03d60efcd5a0d72d2,subnet-0692d1c06d454bf73"
+              },
+              {
+                "name": "EnableCapacityRebalancing",
+                "namespace": "aws:autoscaling:asg",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "EnableSpot",
+                "namespace": "aws:ec2:instances",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "EnhancedHealthAuthEnabled",
+                "namespace": "aws:elasticbeanstalk:healthreporting:system",
+                "resource": "",
+                "value": "true"
+              },
+              {
+                "name": "EnvironmentType",
+                "namespace": "aws:elasticbeanstalk:environment",
+                "resource": "",
+                "value": "SingleInstance"
+              },
+              {
+                "name": "EnvironmentVariables",
+                "namespace": "aws:cloudformation:template:parameter",
+                "resource": "",
+                "value": "PYTHONPATH=/var/app/venv/staging-LQM1lest/bin,DJANGO_SETTINGS_MODULE=recarnation.settings.production,DATABASE_URL=postgres://cardb:temp_password@recarnation-db.cd2e84me0t5r.us-east-1.rds.amazonaws.com:5432/recarnation"
+              },
+              {
+                "name": "ExternalExtensionsS3Bucket",
+                "namespace": "aws:elasticbeanstalk:environment",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "ExternalExtensionsS3Key",
+                "namespace": "aws:elasticbeanstalk:environment",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "HasCoupledDatabase",
+                "namespace": "aws:rds:dbinstance",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "HealthCheckSuccessThreshold",
+                "namespace": "aws:elasticbeanstalk:healthreporting:system",
+                "resource": "",
+                "value": "Ok"
+              },
+              {
+                "name": "HealthStreamingEnabled",
+                "namespace": "aws:elasticbeanstalk:cloudwatch:logs:health",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "HooksPkgUrl",
+                "namespace": "aws:cloudformation:template:parameter",
+                "resource": "",
+                "value": "https://elasticbeanstalk-platform-assets-us-east-1.s3.amazonaws.com/stalks/eb_python311_amazon_linux_2023_1.0.705.0_20250417211222/lib/hooks.tar.gz"
+              },
+              {
+                "name": "IamInstanceProfile",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "aws-elasticbeanstalk-ec2-role"
+              },
+              {
+                "name": "IgnoreHealthCheck",
+                "namespace": "aws:elasticbeanstalk:command",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "ImageId",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "ami-05951b958668b7448"
+              },
+              {
+                "name": "InstancePort",
+                "namespace": "aws:cloudformation:template:parameter",
+                "resource": "",
+                "value": "80"
+              },
+              {
+                "name": "InstanceRefreshEnabled",
+                "namespace": "aws:elasticbeanstalk:managedactions:platformupdate",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "InstanceType",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "t3.medium"
+              },
+              {
+                "name": "InstanceTypeFamily",
+                "namespace": "aws:cloudformation:template:parameter",
+                "resource": "",
+                "value": "t3"
+              },
+              {
+                "name": "InstanceTypes",
+                "namespace": "aws:ec2:instances",
+                "resource": "",
+                "value": "t3.medium"
+              },
+              {
+                "name": "LaunchTemplateTagPropagationEnabled",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "LaunchTimeout",
+                "namespace": "aws:elasticbeanstalk:control",
+                "resource": "",
+                "value": "0"
+              },
+              {
+                "name": "LaunchType",
+                "namespace": "aws:elasticbeanstalk:control",
+                "resource": "",
+                "value": "Migration"
+              },
+              {
+                "name": "LogPublicationControl",
+                "namespace": "aws:elasticbeanstalk:hostmanager",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "ManagedActionsEnabled",
+                "namespace": "aws:elasticbeanstalk:managedactions",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "MaxBatchSize",
+                "namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "MaxSize",
+                "namespace": "aws:autoscaling:asg",
+                "resource": "",
+                "value": "1"
+              },
+              {
+                "name": "MinInstancesInService",
+                "namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "MinSize",
+                "namespace": "aws:autoscaling:asg",
+                "resource": "",
+                "value": "1"
+              },
+              {
+                "name": "MonitoringInterval",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "5 minute"
+              },
+              {
+                "name": "Notification Endpoint",
+                "namespace": "aws:elasticbeanstalk:sns:topics",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "Notification Protocol",
+                "namespace": "aws:elasticbeanstalk:sns:topics",
+                "resource": "",
+                "value": "email"
+              },
+              {
+                "name": "Notification Topic ARN",
+                "namespace": "aws:elasticbeanstalk:sns:topics",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "Notification Topic Name",
+                "namespace": "aws:elasticbeanstalk:sns:topics",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "NumProcesses",
+                "namespace": "aws:elasticbeanstalk:container:python",
+                "resource": "",
+                "value": "1"
+              },
+              {
+                "name": "NumThreads",
+                "namespace": "aws:elasticbeanstalk:container:python",
+                "resource": "",
+                "value": "15"
+              },
+              {
+                "name": "PYTHONPATH",
+                "namespace": "aws:elasticbeanstalk:application:environment",
+                "resource": "",
+                "value": "/var/app/venv/staging-LQM1lest/bin"
+              },
+              {
+                "name": "PauseTime",
+                "namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "PreferredStartTime",
+                "namespace": "aws:elasticbeanstalk:managedactions",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "ProxyServer",
+                "namespace": "aws:elasticbeanstalk:environment:proxy",
+                "resource": "",
+                "value": "nginx"
+              },
+              {
+                "name": "RetentionInDays",
+                "namespace": "aws:elasticbeanstalk:cloudwatch:logs",
+                "resource": "",
+                "value": "7"
+              },
+              {
+                "name": "RetentionInDays",
+                "namespace": "aws:elasticbeanstalk:cloudwatch:logs:health",
+                "resource": "",
+                "value": "7"
+              },
+              {
+                "name": "RollbackLaunchOnFailure",
+                "namespace": "aws:elasticbeanstalk:control",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "RollingUpdateEnabled",
+                "namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "RollingUpdateType",
+                "namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                "resource": "",
+                "value": "Time"
+              },
+              {
+                "name": "RootVolumeIOPS",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "RootVolumeSize",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "RootVolumeThroughput",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "RootVolumeType",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "SSHSourceRestriction",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "tcp,22,22,0.0.0.0/0"
+              },
+              {
+                "name": "SecurityGroups",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "sg-06e6319799e3ca84a"
+              },
+              {
+                "name": "ServiceRole",
+                "namespace": "aws:elasticbeanstalk:environment",
+                "resource": "",
+                "value": "AWSServiceRoleForElasticBeanstalk"
+              },
+              {
+                "name": "ServiceRoleForManagedUpdates",
+                "namespace": "aws:elasticbeanstalk:managedactions",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "SpotAllocationStrategy",
+                "namespace": "aws:ec2:instances",
+                "resource": "",
+                "value": "capacity-optimized"
+              },
+              {
+                "name": "SpotFleetOnDemandAboveBasePercentage",
+                "namespace": "aws:ec2:instances",
+                "resource": "",
+                "value": "0"
+              },
+              {
+                "name": "SpotFleetOnDemandBase",
+                "namespace": "aws:ec2:instances",
+                "resource": "",
+                "value": "0"
+              },
+              {
+                "name": "SpotMaxPrice",
+                "namespace": "aws:ec2:instances",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "StaticFiles",
+                "namespace": "aws:cloudformation:template:parameter",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "StreamLogs",
+                "namespace": "aws:elasticbeanstalk:cloudwatch:logs",
+                "resource": "",
+                "value": "false"
+              },
+              {
+                "name": "Subnets",
+                "namespace": "aws:ec2:vpc",
+                "resource": "",
+                "value": "subnet-03d60efcd5a0d72d2,subnet-0692d1c06d454bf73"
+              },
+              {
+                "name": "SupportedArchitectures",
+                "namespace": "aws:ec2:instances",
+                "resource": "",
+                "value": "x86_64"
+              },
+              {
+                "name": "SystemType",
+                "namespace": "aws:elasticbeanstalk:healthreporting:system",
+                "resource": "",
+                "value": "enhanced"
+              },
+              {
+                "name": "Timeout",
+                "namespace": "aws:autoscaling:updatepolicy:rollingupdate",
+                "resource": "",
+                "value": "PT30M"
+              },
+              {
+                "name": "Timeout",
+                "namespace": "aws:elasticbeanstalk:command",
+                "resource": "",
+                "value": "600"
+              },
+              {
+                "name": "UpdateLevel",
+                "namespace": "aws:elasticbeanstalk:managedactions:platformupdate",
+                "resource": "",
+                "value": ""
+              },
+              {
+                "name": "VPCId",
+                "namespace": "aws:ec2:vpc",
+                "resource": "",
+                "value": "vpc-07cc4e9313b08ce25"
+              },
+              {
+                "name": "WSGIPath",
+                "namespace": "aws:elasticbeanstalk:container:python",
+                "resource": "",
+                "value": "application"
+              },
+              {
+                "name": "XRayEnabled",
+                "namespace": "aws:elasticbeanstalk:xray",
+                "resource": "",
+                "value": "false"
+              }
+            ],
+            "application": "recarnation-app",
+            "arn": "arn:aws:elasticbeanstalk:us-east-1:051826708196:environment/recarnation-app/recarnation-env",
+            "autoscaling_groups": [
+              "awseb-e-utsigrjzun-stack-AWSEBAutoScalingGroup-SQ6uYpmrvUEE"
+            ],
+            "cname": "recarnation-env.eba-keekppae.us-east-1.elasticbeanstalk.com",
+            "cname_prefix": "",
+            "description": "",
+            "endpoint_url": "54.81.196.169",
+            "id": "e-utsigrjzun",
+            "instances": [
+              "i-0f4e9d253ec813c51"
+            ],
+            "launch_configurations": [],
+            "load_balancers": [],
+            "name": "recarnation-env",
+            "platform_arn": "arn:aws:elasticbeanstalk:us-east-1::platform/Python 3.11 running on 64bit Amazon Linux 2023/4.5.1",
+            "poll_interval": null,
+            "queues": [],
+            "setting": [
+              {
+                "name": "DATABASE_URL",
+                "namespace": "aws:elasticbeanstalk:application:environment",
+                "resource": "",
+                "value": "postgres://cardb:temp_password@recarnation-db.cd2e84me0t5r.us-east-1.rds.amazonaws.com:5432/recarnation"
+              },
+              {
+                "name": "DJANGO_SETTINGS_MODULE",
+                "namespace": "aws:elasticbeanstalk:application:environment",
+                "resource": "",
+                "value": "recarnation.settings.production"
+              },
+              {
+                "name": "EnvironmentType",
+                "namespace": "aws:elasticbeanstalk:environment",
+                "resource": "",
+                "value": "SingleInstance"
+              },
+              {
+                "name": "IamInstanceProfile",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "aws-elasticbeanstalk-ec2-role"
+              },
+              {
+                "name": "InstanceType",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "t3.medium"
+              },
+              {
+                "name": "SecurityGroups",
+                "namespace": "aws:autoscaling:launchconfiguration",
+                "resource": "",
+                "value": "sg-06e6319799e3ca84a"
+              },
+              {
+                "name": "Subnets",
+                "namespace": "aws:ec2:vpc",
+                "resource": "",
+                "value": "subnet-0692d1c06d454bf73,subnet-03d60efcd5a0d72d2"
+              },
+              {
+                "name": "VPCId",
+                "namespace": "aws:ec2:vpc",
+                "resource": "",
+                "value": "vpc-07cc4e9313b08ce25"
+              }
+            ],
+            "solution_stack_name": "64bit Amazon Linux 2023 v4.5.1 running Python 3.11",
+            "tags": null,
+            "tags_all": {},
+            "template_name": null,
+            "tier": "WebServer",
+            "triggers": [],
+            "version_label": "",
+            "wait_for_ready_timeout": "20m"
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "setting"
+              }
+            ]
+          ],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_db_instance.recarnation_db",
+            "aws_db_subnet_group.recarnation_subnet_group",
+            "aws_elastic_beanstalk_application.recarnation",
+            "aws_security_group.eb_sg",
+            "aws_security_group.jenkins_sg",
+            "aws_security_group.rds_sg",
+            "aws_subnet.private",
+            "aws_subnet.public",
+            "aws_vpc.recarnation_vpc",
+            "data.aws_availability_zones.available",
+            "data.aws_elastic_beanstalk_solution_stack.python",
+            "data.http.my_ip"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "jenkins",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "ami": "ami-0c7217cdde317cfec",
+            "arn": "arn:aws:ec2:us-east-1:051826708196:instance/i-0164f0db4b6253baa",
+            "associate_public_ip_address": true,
+            "availability_zone": "us-east-1a",
+            "capacity_reservation_specification": [
+              {
+                "capacity_reservation_preference": "open",
+                "capacity_reservation_target": []
+              }
+            ],
+            "cpu_core_count": 1,
+            "cpu_options": [
+              {
+                "amd_sev_snp": "",
+                "core_count": 1,
+                "threads_per_core": 2
+              }
+            ],
+            "cpu_threads_per_core": 2,
+            "credit_specification": [
+              {
+                "cpu_credits": "unlimited"
+              }
+            ],
+            "disable_api_stop": false,
+            "disable_api_termination": false,
+            "ebs_block_device": [],
+            "ebs_optimized": false,
+            "enable_primary_ipv6": null,
+            "enclave_options": [
+              {
+                "enabled": false
+              }
+            ],
+            "ephemeral_block_device": [],
+            "get_password_data": false,
+            "hibernation": false,
+            "host_id": "",
+            "host_resource_group_arn": null,
+            "iam_instance_profile": "",
+            "id": "i-0164f0db4b6253baa",
+            "instance_initiated_shutdown_behavior": "stop",
+            "instance_lifecycle": "",
+            "instance_market_options": [],
+            "instance_state": "running",
+            "instance_type": "t3.large",
+            "ipv6_address_count": 0,
+            "ipv6_addresses": [],
+            "key_name": "jenkins-key-e8f3915e",
+            "launch_template": [],
+            "maintenance_options": [
+              {
+                "auto_recovery": "default"
+              }
+            ],
+            "metadata_options": [
+              {
+                "http_endpoint": "enabled",
+                "http_protocol_ipv6": "disabled",
+                "http_put_response_hop_limit": 1,
+                "http_tokens": "required",
+                "instance_metadata_tags": "disabled"
+              }
+            ],
+            "monitoring": false,
+            "network_interface": [],
+            "outpost_arn": "",
+            "password_data": "",
+            "placement_group": "",
+            "placement_partition_number": 0,
+            "primary_network_interface_id": "eni-0479e10232773c215",
+            "private_dns": "ip-10-0-1-242.ec2.internal",
+            "private_dns_name_options": [
+              {
+                "enable_resource_name_dns_a_record": false,
+                "enable_resource_name_dns_aaaa_record": false,
+                "hostname_type": "ip-name"
+              }
+            ],
+            "private_ip": "10.0.1.242",
+            "public_dns": "ec2-54-86-186-35.compute-1.amazonaws.com",
+            "public_ip": "54.86.186.35",
+            "root_block_device": [
+              {
+                "delete_on_termination": true,
+                "device_name": "/dev/sda1",
+                "encrypted": false,
+                "iops": 100,
+                "kms_key_id": "",
+                "tags": {},
+                "tags_all": {},
+                "throughput": 0,
+                "volume_id": "vol-0813fae1bb335a57b",
+                "volume_size": 8,
+                "volume_type": "gp2"
+              }
+            ],
+            "secondary_private_ips": [],
+            "security_groups": [],
+            "source_dest_check": true,
+            "spot_instance_request_id": "",
+            "subnet_id": "subnet-0692d1c06d454bf73",
+            "tags": {
+              "Name": "Jenkins-Server"
+            },
+            "tags_all": {
+              "Name": "Jenkins-Server"
+            },
+            "tenancy": "default",
+            "timeouts": null,
+            "user_data": "b533f16e0cb9545300c5a0a1eab3419e7f492ad7",
+            "user_data_base64": null,
+            "user_data_replace_on_change": false,
+            "volume_tags": null,
+            "vpc_security_group_ids": [
+              "sg-07ed3a5bdcdaeae63"
+            ]
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMCwicmVhZCI6OTAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_key_pair.jenkins_key",
+            "aws_security_group.jenkins_sg",
+            "aws_subnet.public",
+            "aws_vpc.recarnation_vpc",
+            "data.aws_availability_zones.available",
+            "data.http.my_ip"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_internet_gateway",
+      "name": "gw",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:051826708196:internet-gateway/igw-0a8f7f19d5ab5e85f",
+            "id": "igw-0a8f7f19d5ab5e85f",
+            "owner_id": "051826708196",
+            "tags": {
+              "Name": "recarnation-igw"
+            },
+            "tags_all": {
+              "Name": "recarnation-igw"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-07cc4e9313b08ce25"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_vpc.recarnation_vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_key_pair",
+      "name": "jenkins_key",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:051826708196:key-pair/jenkins-key-e8f3915e",
+            "fingerprint": "0c:f6:95:32:29:01:3b:b7:d1:62:fc:be:60:9b:d5:bb",
+            "id": "jenkins-key-e8f3915e",
+            "key_name": "jenkins-key-e8f3915e",
+            "key_name_prefix": "",
+            "key_pair_id": "key-06ab3c72c4256922b",
+            "key_type": "rsa",
+            "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDtEBgu6dhmh3U0NY/e1pcETL79vlB4yKxXMC60BmHUVxMbdz4h5SW6qBxHxb06IL1ah+gSrpdmNZvNSSjfWXjAkZOlurHmf0fofAx5L5ys7Yde9Lh9sB6vuXhcmgOMjvqu9Z8hsHj5KSaBV4O+0BVKQWMu091S7nyAh80mKl8/OTk4oo/WrJA7gZPGhhgAhe7lL0mENsByFlbrN/msr0OjJEWhwKS43SEENgbjpXGj47avU7/Fs7zMD/ZSYELbT+YwWxdz/IG6mtYoKlBdTNzA7HVfcZLKbPkFdTVKiLJl0tJ6zHlfCbOZZkhc0RV4fmuWAjp2dQ+TBjMIlt56JYMxuh7Xsp5AOmE1Mc84ryFVtxJvtMrYQyyg3SNpjD5+IhPPWkq14P+dySUVP6POINyP/+jJUMWIP4NI+hnsLfdpZARgGbwXbeRl97ZPe+aKHasaSukEPIgEBmMrcDPmRj0ixGzEjRInGxLA6nNg+QjlRxunTCO6/FqaIKA04Ip4/IPl1LGuhCT2Q/4UAOe6GQrmcMGGCQmEDWlgHzjw876wq7TuI4mlvLCyqeOe2Uw00UO9DpitxyyYM1ObnjB1u3VC0mdP3UIvEExcd8KtNiFeH7iza4qTjjxie1vhj6AdHjdiaXCIoUpvGjWQzbZ0LoXPWq4hvYX3A55xAMh5tgR4YQ== apoorva@Appu",
+            "tags": null,
+            "tags_all": {}
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table",
+      "name": "public",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:051826708196:route-table/rtb-09d2c28663123eacf",
+            "id": "rtb-09d2c28663123eacf",
+            "owner_id": "051826708196",
+            "propagating_vgws": [],
+            "route": [
+              {
+                "carrier_gateway_id": "",
+                "cidr_block": "0.0.0.0/0",
+                "core_network_arn": "",
+                "destination_prefix_list_id": "",
+                "egress_only_gateway_id": "",
+                "gateway_id": "igw-0a8f7f19d5ab5e85f",
+                "ipv6_cidr_block": "",
+                "local_gateway_id": "",
+                "nat_gateway_id": "",
+                "network_interface_id": "",
+                "transit_gateway_id": "",
+                "vpc_endpoint_id": "",
+                "vpc_peering_connection_id": ""
+              }
+            ],
+            "tags": null,
+            "tags_all": {},
+            "timeouts": null,
+            "vpc_id": "vpc-07cc4e9313b08ce25"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.gw",
+            "aws_vpc.recarnation_vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "public",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-0d0e14ac1d082ea1f",
+            "route_table_id": "rtb-09d2c28663123eacf",
+            "subnet_id": "subnet-0692d1c06d454bf73",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.gw",
+            "aws_route_table.public",
+            "aws_subnet.public",
+            "aws_vpc.recarnation_vpc",
+            "data.aws_availability_zones.available"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": "",
+            "id": "rtbassoc-08adcabf317a06674",
+            "route_table_id": "rtb-09d2c28663123eacf",
+            "subnet_id": "subnet-03d60efcd5a0d72d2",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozMDAwMDAwMDAwMDAsImRlbGV0ZSI6MzAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEyMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "aws_internet_gateway.gw",
+            "aws_route_table.public",
+            "aws_subnet.public",
+            "aws_vpc.recarnation_vpc",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "recarnation_frontend",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acceleration_status": "",
+            "acl": null,
+            "arn": "arn:aws:s3:::recarnation-frontend-af0e296b95a0a9bc",
+            "bucket": "recarnation-frontend-af0e296b95a0a9bc",
+            "bucket_domain_name": "recarnation-frontend-af0e296b95a0a9bc.s3.amazonaws.com",
+            "bucket_prefix": "",
+            "bucket_regional_domain_name": "recarnation-frontend-af0e296b95a0a9bc.s3.us-east-1.amazonaws.com",
+            "cors_rule": [],
+            "force_destroy": false,
+            "grant": [
+              {
+                "id": "bc1ba67c997d1024e1edaf2b43368923da13eb62fed9bac6492055efa68ce1fb",
+                "permissions": [
+                  "FULL_CONTROL"
+                ],
+                "type": "CanonicalUser",
+                "uri": ""
+              }
+            ],
+            "hosted_zone_id": "Z3AQBSTGFYJSTF",
+            "id": "recarnation-frontend-af0e296b95a0a9bc",
+            "lifecycle_rule": [],
+            "logging": [],
+            "object_lock_configuration": [],
+            "object_lock_enabled": false,
+            "policy": "",
+            "region": "us-east-1",
+            "replication_configuration": [],
+            "request_payer": "BucketOwner",
+            "server_side_encryption_configuration": [
+              {
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "kms_master_key_id": "",
+                        "sse_algorithm": "AES256"
+                      }
+                    ],
+                    "bucket_key_enabled": false
+                  }
+                ]
+              }
+            ],
+            "tags": null,
+            "tags_all": {},
+            "timeouts": null,
+            "versioning": [
+              {
+                "enabled": false,
+                "mfa_delete": false
+              }
+            ],
+            "website": [],
+            "website_domain": null,
+            "website_endpoint": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "random_id.bucket_suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_ownership_controls",
+      "name": "frontend_owner",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "recarnation-frontend-af0e296b95a0a9bc",
+            "id": "recarnation-frontend-af0e296b95a0a9bc",
+            "rule": [
+              {
+                "object_ownership": "BucketOwnerEnforced"
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.recarnation_frontend",
+            "random_id.bucket_suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_policy",
+      "name": "frontend_policy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "recarnation-frontend-af0e296b95a0a9bc",
+            "id": "recarnation-frontend-af0e296b95a0a9bc",
+            "policy": "{\"Statement\":[{\"Action\":\"s3:GetObject\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Resource\":\"arn:aws:s3:::recarnation-frontend-af0e296b95a0a9bc/*\"}],\"Version\":\"2012-10-17\"}"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.recarnation_frontend",
+            "aws_s3_bucket_public_access_block.frontend_access",
+            "random_id.bucket_suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_public_access_block",
+      "name": "frontend_access",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "block_public_acls": false,
+            "block_public_policy": false,
+            "bucket": "recarnation-frontend-af0e296b95a0a9bc",
+            "id": "recarnation-frontend-af0e296b95a0a9bc",
+            "ignore_public_acls": false,
+            "restrict_public_buckets": false
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.recarnation_frontend",
+            "random_id.bucket_suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "eb_sg",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:051826708196:security-group/sg-06e6319799e3ca84a",
+            "description": "Allow inbound access to Elastic Beanstalk",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-06e6319799e3ca84a",
+            "ingress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 443,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 443
+              },
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 80,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 80
+              }
+            ],
+            "name": "recarnation-eb-sg",
+            "name_prefix": "",
+            "owner_id": "051826708196",
+            "revoke_rules_on_delete": false,
+            "tags": null,
+            "tags_all": {},
+            "timeouts": null,
+            "vpc_id": "vpc-07cc4e9313b08ce25"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_vpc.recarnation_vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "jenkins_sg",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:051826708196:security-group/sg-07ed3a5bdcdaeae63",
+            "description": "Allow restricted access to Jenkins",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-07ed3a5bdcdaeae63",
+            "ingress": [
+              {
+                "cidr_blocks": [
+                  "73.202.223.100/32"
+                ],
+                "description": "",
+                "from_port": 22,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 22
+              },
+              {
+                "cidr_blocks": [
+                  "73.202.223.100/32"
+                ],
+                "description": "",
+                "from_port": 8080,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 8080
+              }
+            ],
+            "name": "jenkins-sg",
+            "name_prefix": "",
+            "owner_id": "051826708196",
+            "revoke_rules_on_delete": false,
+            "tags": null,
+            "tags_all": {},
+            "timeouts": null,
+            "vpc_id": "vpc-07cc4e9313b08ce25"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_vpc.recarnation_vpc",
+            "data.http.my_ip"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "rds_sg",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:051826708196:security-group/sg-05779f221b469ec88",
+            "description": "Allow access to RDS from Elastic Beanstalk",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-05779f221b469ec88",
+            "ingress": [
+              {
+                "cidr_blocks": [],
+                "description": "",
+                "from_port": 5432,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [
+                  "sg-07ed3a5bdcdaeae63"
+                ],
+                "self": false,
+                "to_port": 5432
+              }
+            ],
+            "name": "recarnation-rds-sg",
+            "name_prefix": "",
+            "owner_id": "051826708196",
+            "revoke_rules_on_delete": false,
+            "tags": {
+              "Name": "recarnation-rds-sg"
+            },
+            "tags_all": {
+              "Name": "recarnation-rds-sg"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-07cc4e9313b08ce25"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_security_group.jenkins_sg",
+            "aws_vpc.recarnation_vpc",
+            "data.http.my_ip"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "private",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:051826708196:subnet/subnet-092a6a187cc7bdd43",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1a",
+            "availability_zone_id": "use1-az2",
+            "cidr_block": "10.0.3.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-092a6a187cc7bdd43",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": false,
+            "outpost_arn": "",
+            "owner_id": "051826708196",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": null,
+            "tags_all": {},
+            "timeouts": null,
+            "vpc_id": "vpc-07cc4e9313b08ce25"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.recarnation_vpc",
+            "data.aws_availability_zones.available"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:051826708196:subnet/subnet-0745f652bde66e07d",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1b",
+            "availability_zone_id": "use1-az4",
+            "cidr_block": "10.0.4.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-0745f652bde66e07d",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": false,
+            "outpost_arn": "",
+            "owner_id": "051826708196",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": null,
+            "tags_all": {},
+            "timeouts": null,
+            "vpc_id": "vpc-07cc4e9313b08ce25"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.recarnation_vpc",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "public",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:051826708196:subnet/subnet-0692d1c06d454bf73",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1a",
+            "availability_zone_id": "use1-az2",
+            "cidr_block": "10.0.1.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-0692d1c06d454bf73",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": true,
+            "outpost_arn": "",
+            "owner_id": "051826708196",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "recarnation-public-1"
+            },
+            "tags_all": {
+              "Name": "recarnation-public-1"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-07cc4e9313b08ce25"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.recarnation_vpc",
+            "data.aws_availability_zones.available"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:051826708196:subnet/subnet-03d60efcd5a0d72d2",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1b",
+            "availability_zone_id": "use1-az4",
+            "cidr_block": "10.0.2.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-03d60efcd5a0d72d2",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": true,
+            "outpost_arn": "",
+            "owner_id": "051826708196",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "recarnation-public-2"
+            },
+            "tags_all": {
+              "Name": "recarnation-public-2"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-07cc4e9313b08ce25"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.recarnation_vpc",
+            "data.aws_availability_zones.available"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_vpc",
+      "name": "recarnation_vpc",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:051826708196:vpc/vpc-07cc4e9313b08ce25",
+            "assign_generated_ipv6_cidr_block": false,
+            "cidr_block": "10.0.0.0/16",
+            "default_network_acl_id": "acl-0518daac6eac15bfa",
+            "default_route_table_id": "rtb-0d4cdc65913b7914e",
+            "default_security_group_id": "sg-020941075311216e2",
+            "dhcp_options_id": "dopt-060d48992dd162809",
+            "enable_dns_hostnames": true,
+            "enable_dns_support": true,
+            "enable_network_address_usage_metrics": false,
+            "id": "vpc-07cc4e9313b08ce25",
+            "instance_tenancy": "default",
+            "ipv4_ipam_pool_id": null,
+            "ipv4_netmask_length": null,
+            "ipv6_association_id": "",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_network_border_group": "",
+            "ipv6_ipam_pool_id": "",
+            "ipv6_netmask_length": 0,
+            "main_route_table_id": "rtb-0d4cdc65913b7914e",
+            "owner_id": "051826708196",
+            "tags": {
+              "Name": "recarnation-vpc"
+            },
+            "tags_all": {
+              "Name": "recarnation-vpc"
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "okta_app_oauth",
+      "name": "github_sso",
+      "provider": "provider[\"registry.terraform.io/okta/okta\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "accessibility_error_redirect_url": "",
+            "accessibility_login_redirect_url": "",
+            "accessibility_self_service": false,
+            "admin_note": "",
+            "app_links_json": "{\"oidc_client_link\":true}",
+            "app_settings_json": "{}",
+            "authentication_policy": "rstr00203xXEXARUq697",
+            "auto_key_rotation": true,
+            "auto_submit_toolbar": false,
+            "client_basic_secret": null,
+            "client_id": "0oar8ttlcarPGUOoL697",
+            "client_secret": "d8b1yPHHEhm4WEXvisamty4_2F3Rl-BQG5boUmla7IjRIplmqxlyIf__eM3YVMyr",
+            "client_uri": "",
+            "consent_method": "TRUSTED",
+            "enduser_note": "",
+            "grant_types": [
+              "authorization_code"
+            ],
+            "groups_claim": [],
+            "hide_ios": true,
+            "hide_web": true,
+            "id": "0oar8ttlcarPGUOoL697",
+            "implicit_assignment": false,
+            "issuer_mode": "ORG_URL",
+            "jwks": [],
+            "jwks_uri": "",
+            "label": "GitHub SSO",
+            "login_mode": "DISABLED",
+            "login_scopes": null,
+            "login_uri": "",
+            "logo": null,
+            "logo_uri": "",
+            "logo_url": "https://ok14static.oktacdn.com/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
+            "name": "oidc_client",
+            "omit_secret": false,
+            "pkce_required": true,
+            "policy_uri": "",
+            "post_logout_redirect_uris": null,
+            "profile": "",
+            "redirect_uris": [
+              "https://github.com/sessions/oauth/authorize"
+            ],
+            "refresh_token_leeway": 0,
+            "refresh_token_rotation": "STATIC",
+            "response_types": [
+              "code"
+            ],
+            "sign_on_mode": "OPENID_CONNECT",
+            "status": "ACTIVE",
+            "timeouts": null,
+            "token_endpoint_auth_method": "client_secret_basic",
+            "tos_uri": "",
+            "type": "browser",
+            "user_name_template": "${source.login}",
+            "user_name_template_push_status": "",
+            "user_name_template_suffix": "",
+            "user_name_template_type": "BUILT_IN",
+            "wildcard_redirect": "DISABLED"
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "client_secret"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "client_basic_secret"
+              }
+            ]
+          ],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozNjAwMDAwMDAwMDAwLCJyZWFkIjozNjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjM2MDAwMDAwMDAwMDB9fQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "okta_app_oauth",
+      "name": "recarnation",
+      "provider": "provider[\"registry.terraform.io/okta/okta\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "accessibility_error_redirect_url": "",
+            "accessibility_login_redirect_url": "",
+            "accessibility_self_service": false,
+            "admin_note": "",
+            "app_links_json": "{\"oidc_client_link\":true}",
+            "app_settings_json": "{}",
+            "authentication_policy": "rstr00203xXEXARUq697",
+            "auto_key_rotation": true,
+            "auto_submit_toolbar": false,
+            "client_basic_secret": null,
+            "client_id": "0oar8u4y49QbLAHbu697",
+            "client_secret": "c58uo3gHCkQ7QsAnx4VRR4ufkxj6zNiRfcvSH026sQIDB6rCSLsgNOvV1zW4mLZp",
+            "client_uri": "",
+            "consent_method": "TRUSTED",
+            "enduser_note": "",
+            "grant_types": [
+              "authorization_code",
+              "refresh_token"
+            ],
+            "groups_claim": [],
+            "hide_ios": true,
+            "hide_web": true,
+            "id": "0oar8u4y49QbLAHbu697",
+            "implicit_assignment": false,
+            "issuer_mode": "ORG_URL",
+            "jwks": [],
+            "jwks_uri": "",
+            "label": "Recarnation Django App",
+            "login_mode": "DISABLED",
+            "login_scopes": null,
+            "login_uri": "https://d1pnhzsq8ocz1s.cloudfront.net/",
+            "logo": null,
+            "logo_uri": "",
+            "logo_url": "https://ok14static.oktacdn.com/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
+            "name": "oidc_client",
+            "omit_secret": false,
+            "pkce_required": false,
+            "policy_uri": "",
+            "post_logout_redirect_uris": null,
+            "profile": "",
+            "redirect_uris": [
+              "https://d1pnhzsq8ocz1s.cloudfront.net/oauth/callback/okta/",
+              "https://recarnation-env.eba-keekppae.us-east-1.elasticbeanstalk.com/oauth/callback/okta/"
+            ],
+            "refresh_token_leeway": 0,
+            "refresh_token_rotation": "STATIC",
+            "response_types": [
+              "code"
+            ],
+            "sign_on_mode": "OPENID_CONNECT",
+            "status": "ACTIVE",
+            "timeouts": null,
+            "token_endpoint_auth_method": "client_secret_basic",
+            "tos_uri": "",
+            "type": "web",
+            "user_name_template": "${source.login}",
+            "user_name_template_push_status": "",
+            "user_name_template_suffix": "",
+            "user_name_template_type": "BUILT_IN",
+            "wildcard_redirect": "DISABLED"
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "client_basic_secret"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "client_secret"
+              }
+            ]
+          ],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozNjAwMDAwMDAwMDAwLCJyZWFkIjozNjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjM2MDAwMDAwMDAwMDB9fQ==",
+          "dependencies": [
+            "aws_cloudfront_distribution.recarnation_distribution",
+            "aws_cloudfront_origin_access_identity.recarnation_oai",
+            "aws_db_instance.recarnation_db",
+            "aws_db_subnet_group.recarnation_subnet_group",
+            "aws_elastic_beanstalk_application.recarnation",
+            "aws_elastic_beanstalk_environment.recarnation_env",
+            "aws_s3_bucket.recarnation_frontend",
+            "aws_security_group.eb_sg",
+            "aws_security_group.jenkins_sg",
+            "aws_security_group.rds_sg",
+            "aws_subnet.private",
+            "aws_subnet.public",
+            "aws_vpc.recarnation_vpc",
+            "data.aws_availability_zones.available",
+            "data.aws_elastic_beanstalk_solution_stack.python",
+            "data.http.my_ip",
+            "random_id.bucket_suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "okta_app_user_schema_property",
+      "name": "app_custom_property",
+      "provider": "provider[\"registry.terraform.io/okta/okta\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "app_id": "0oar8u4y49QbLAHbu697",
+            "array_enum": null,
+            "array_one_of": [],
+            "array_type": null,
+            "description": "Custom user attribute",
+            "enum": null,
+            "external_name": "",
+            "external_namespace": "",
+            "id": "0oar8u4y49QbLAHbu697/customPropertyName",
+            "index": "customPropertyName",
+            "master": "PROFILE_MASTER",
+            "max_length": null,
+            "min_length": null,
+            "one_of": [],
+            "permissions": "READ_ONLY",
+            "required": false,
+            "scope": "NONE",
+            "title": "Custom Property",
+            "type": "string",
+            "union": false,
+            "unique": "",
+            "user_type": "default"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjIifQ==",
+          "dependencies": [
+            "aws_cloudfront_distribution.recarnation_distribution",
+            "aws_cloudfront_origin_access_identity.recarnation_oai",
+            "aws_db_instance.recarnation_db",
+            "aws_db_subnet_group.recarnation_subnet_group",
+            "aws_elastic_beanstalk_application.recarnation",
+            "aws_elastic_beanstalk_environment.recarnation_env",
+            "aws_s3_bucket.recarnation_frontend",
+            "aws_security_group.eb_sg",
+            "aws_security_group.jenkins_sg",
+            "aws_security_group.rds_sg",
+            "aws_subnet.private",
+            "aws_subnet.public",
+            "aws_vpc.recarnation_vpc",
+            "data.aws_availability_zones.available",
+            "data.aws_elastic_beanstalk_solution_stack.python",
+            "data.http.my_ip",
+            "okta_app_oauth.recarnation",
+            "random_id.bucket_suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "okta_idp_social",
+      "name": "github",
+      "provider": "provider[\"registry.terraform.io/okta/okta\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "account_link_action": "AUTO",
+            "account_link_group_include": null,
+            "apple_kid": null,
+            "apple_private_key": null,
+            "apple_team_id": null,
+            "authorization_binding": null,
+            "authorization_url": null,
+            "client_id": "Ov23liB8jl1MOUhd0GwM",
+            "client_secret": "47670210a88406e6ea77cf430899d82b9b090732",
+            "deprovisioned_action": "NONE",
+            "groups_action": "NONE",
+            "groups_assignment": null,
+            "groups_attribute": "",
+            "groups_filter": null,
+            "id": "0oar8tt60dKmyCWb6697",
+            "issuer_mode": "ORG_URL",
+            "max_clock_skew": 0,
+            "name": "GitHub",
+            "profile_master": false,
+            "protocol_type": "OIDC",
+            "provisioning_action": "AUTO",
+            "scopes": [
+              "user:email"
+            ],
+            "status": "ACTIVE",
+            "subject_match_attribute": "",
+            "subject_match_type": "USERNAME",
+            "suspended_action": "NONE",
+            "token_binding": null,
+            "token_url": null,
+            "trust_audience": null,
+            "trust_issuer": null,
+            "trust_kid": null,
+            "trust_revocation": null,
+            "trust_revocation_cache_lifetime": null,
+            "type": "GITHUB",
+            "username_template": "idpuser.email"
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "apple_private_key"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "client_secret"
+              }
+            ]
+          ],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "okta_user_schema_property",
+      "name": "custom_property",
+      "provider": "provider[\"registry.terraform.io/okta/okta\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "array_enum": null,
+            "array_one_of": [],
+            "array_type": null,
+            "description": "Custom user attribute",
+            "enum": null,
+            "external_name": "",
+            "external_namespace": "",
+            "id": "customPropertyName",
+            "index": "customPropertyName",
+            "master": "PROFILE_MASTER",
+            "master_override_priority": [],
+            "max_length": null,
+            "min_length": null,
+            "one_of": [],
+            "pattern": null,
+            "permissions": "READ_WRITE",
+            "required": false,
+            "scope": "SELF",
+            "title": "Custom Property",
+            "type": "string",
+            "unique": "",
+            "user_type": "default"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "random_id",
+      "name": "bucket_suffix",
+      "provider": "provider[\"registry.terraform.io/hashicorp/random\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "b64_std": "rw4pa5Wgqbw=",
+            "b64_url": "rw4pa5Wgqbw",
+            "byte_length": 8,
+            "dec": "12614065148359911868",
+            "hex": "af0e296b95a0a9bc",
+            "id": "rw4pa5Wgqbw",
+            "keepers": null,
+            "prefix": null
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
